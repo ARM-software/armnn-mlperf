@@ -87,6 +87,34 @@ $ ck benchmark program:image-classification-armnn-tflite --env.USE_NEON \
 --skip_print_timers --skip_stat_analysis --process_multi_keys
 ```
 
+#### Install ArmNN with OpenCL and TFLite support
+Minimally, run:
+```
+$ ck install package --tags=lib,armnn,tflite,opencl,rel.19.02
+```
+or also include Neon, TF, ONNX support e.g.:
+```
+$ ck install package --tags=lib,armnn,tflite,neon,opencl,tf,onnx,rel.19.02
+```
+
+#### Run on 500 images
+```
+$ ck benchmark program:image-classification-armnn-tflite --env.USE_OPENCL \
+--repetitions=1  --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=500 \
+--record --record_repo=local --record_uoa=mlperf-mobilenet-armnn-tflite-accuracy-500-opencl \
+--tags=image-classification,mlperf,mobilenet,armnn-tflite,accuracy,500,opencl \
+--skip_print_timers --skip_stat_analysis --process_multi_keys
+```
+
+#### Run on 50,000 images
+```
+$ ck benchmark program:image-classification-armnn-tflite --env.USE_OPENCL \
+--repetitions=1  --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=50000 \
+--record --record_repo=local --record_uoa=mlperf-mobilenet-armnn-tflite-accuracy-opencl \
+--tags=image-classification,mlperf,mobilenet,armnn-tflite,accuracy,opencl \
+--skip_print_timers --skip_stat_analysis --process_multi_keys
+```
+
 ### ArmNN reference data (**NOT RECOMMENDED**)
 
 **NB:** This validation can run on x86 or arm. However, it is completely unoptimised and hence extremely slow (e.g. 6.5 seconds per image on HiKey960 or 2.9 seconds per image on a Xeon server).
