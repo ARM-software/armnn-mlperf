@@ -54,6 +54,39 @@ $ ln -s `ck find program:image-classification-tflite`/preprocessed \
         `ck find program:image-classification-armnn-tflite`/preprocessed
 ```
 
+### ArmNN Neon data
+
+For full details on how to build ArmNN with Neon support, please refer to the [CK-ArmNN](http://github.com/ctuning/ck-armnn) repository.
+A brief summary is provided below.
+
+#### Install ArmNN with Neon and TFLite support
+Minimally, run:
+```
+$ ck install package --tags=lib,armnn,tflite,neon,rel.19.02
+```
+or also include OpenCL, TF, ONNX support e.g.:
+```
+$ ck install package --tags=lib,armnn,tflite,neon,opencl,tf,onnx,rel.19.02
+```
+
+#### Run on 500 images
+```
+$ ck benchmark program:image-classification-armnn-tflite --env.USE_NEON \
+--repetitions=1  --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=500 \
+--record --record_repo=local --record_uoa=mlperf-mobilenet-armnn-tflite-accuracy-500-neon \
+--tags=image-classification,mlperf,mobilenet,armnn-tflite,accuracy,500,neon \
+--skip_print_timers --skip_stat_analysis --process_multi_keys
+```
+
+#### Run on 50,000 images
+```
+$ ck benchmark program:image-classification-armnn-tflite --env.USE_NEON \
+--repetitions=1  --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=50000 \
+--record --record_repo=local --record_uoa=mlperf-mobilenet-armnn-tflite-accuracy-neon \
+--tags=image-classification,mlperf,mobilenet,armnn-tflite,accuracy,neon \
+--skip_print_timers --skip_stat_analysis --process_multi_keys
+```
+
 ### ArmNN reference data (**NOT RECOMMENDED**)
 
 **NB:** This validation can run on x86 or arm. However, it is completely unoptimised and hence extremely slow (e.g. 6.5 seconds per image on HiKey960 or 2.9 seconds per image on a Xeon server).
