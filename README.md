@@ -8,10 +8,10 @@ $ ck pull repo:armnn-mlperf --url=git@github.com:ARM-software/mlperf.git
 1. [CK repositories](#repos)
 1. [ImageNet validation dataset](#imagenet)
 1. [MobileNet model](#mobilenet)
-    i. [TFLite data](#mobilenet_tflite) (reference)
-    i. [ArmNN Neon data](#mobilenet_armnn_neon)
-    i. [ArmNN OpenCL data](#mobilenet_armnn_opencl)
-    i. [ArmNN Reference data](#mobilenet_armnn_reference)
+    - [TFLite data](#mobilenet_tflite) (reference)
+    - [ArmNN Neon data](#mobilenet_armnn_neon)
+    - [ArmNN OpenCL data](#mobilenet_armnn_opencl)
+    - [ArmNN Reference data](#mobilenet_armnn_reference)
 
 
 <a name="repos"></a>
@@ -156,6 +156,17 @@ $ ck benchmark program:image-classification-armnn-tflite --env.USE_OPENCL \
 ### ArmNN Reference data (**NOT RECOMMENDED**)
 
 **NB:** This validation can run on x86 or arm. However, it is completely unoptimised and hence extremely slow (e.g. 6.5 seconds per image on HiKey960 or 2.9 seconds per image on a Xeon server).
+
+
+#### Install ArmNN with TFLite support
+Minimally, run:
+```
+$ ck install package --tags=lib,armnn,tflite,rel.19.02
+```
+or also include Neon, OpenCL, TF, ONNX support e.g.:
+```
+$ ck install package --tags=lib,armnn,tflite,neon,opencl,tf,onnx,rel.19.02
+```
 
 #### Run on 500 images
 ```
