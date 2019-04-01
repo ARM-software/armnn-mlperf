@@ -14,6 +14,10 @@
     - [ArmNN OpenCL data](#mobilenet_armnn_opencl)
     - [ArmNN Reference data](#mobilenet_armnn_reference)
 - [ResNet model](#resnet)
+    - [TFLite data](#resnet_tflite) (reference)
+    - [ArmNN Neon data](#resnet_armnn_neon)
+    - [ArmNN OpenCL data](#resnet_armnn_opencl)
+    - [ArmNN Reference data](#resnet_armnn_reference)
 
 <a name="getting_started"></a>
 # Getting started
@@ -211,3 +215,65 @@ $ ck benchmark program:image-classification-tflite \
 --skip_print_timers --skip_stat_analysis --process_multi_keys
 ```
 
+<a name="resnet_armnn_neon"></a>
+### ArmNN Neon data
+
+#### Run on 500 images
+```
+$ ck benchmark program:image-classification-armnn-tflite --env.USE_NEON \
+--repetitions=1  --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=500 \
+--record --record_repo=local --record_uoa=mlperf-resnet-armnn-tflite-accuracy-500-neon \
+--tags=image-classification,mlperf,resnet,armnn-tflite,accuracy,500,neon \
+--skip_print_timers --skip_stat_analysis --process_multi_keys
+```
+
+#### Run on 50,000 images
+```
+$ ck benchmark program:image-classification-armnn-tflite --env.USE_NEON \
+--repetitions=1  --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=50000 \
+--record --record_repo=local --record_uoa=mlperf-resnet-armnn-tflite-accuracy-neon \
+--tags=image-classification,mlperf,resnet,armnn-tflite,accuracy,neon \
+--skip_print_timers --skip_stat_analysis --process_multi_keys
+```
+
+<a name="resnet_armnn_opencl"></a>
+### ArmNN OpenCL data
+
+#### Run on 500 images
+```
+$ ck benchmark program:image-classification-armnn-tflite --env.USE_OPENCL \
+--repetitions=1  --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=500 \
+--record --record_repo=local --record_uoa=mlperf-resnet-armnn-tflite-accuracy-500-opencl \
+--tags=image-classification,mlperf,resnet,armnn-tflite,accuracy,500,opencl \
+--skip_print_timers --skip_stat_analysis --process_multi_keys
+```
+
+#### Run on 50,000 images
+```
+$ ck benchmark program:image-classification-armnn-tflite --env.USE_OPENCL \
+--repetitions=1  --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=50000 \
+--record --record_repo=local --record_uoa=mlperf-resnet-armnn-tflite-accuracy-opencl \
+--tags=image-classification,mlperf,resnet,armnn-tflite,accuracy,opencl \
+--skip_print_timers --skip_stat_analysis --process_multi_keys
+```
+
+<a name="resnet_armnn_reference"></a>
+### ArmNN Reference data (**NOT RECOMMENDED**)
+
+#### Run on 500 images
+```
+$ ck benchmark program:image-classification-armnn-tflite \
+--repetitions=1  --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=500 \
+--record --record_repo=local --record_uoa=mlperf-resnet-armnn-tflite-accuracy-500 \
+--tags=image-classification,mlperf,resnet,armnn-tflite,accuracy,500 \
+--skip_print_timers --skip_stat_analysis --process_multi_keys
+```
+
+#### Run on 50,000 images
+```
+$ ck benchmark program:image-classification-armnn-tflite \
+--repetitions=1  --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=50000 \
+--record --record_repo=local --record_uoa=mlperf-resnet-armnn-tflite-accuracy \
+--tags=image-classification,mlperf,resnet,armnn-tflite,accuracy \
+--skip_print_timers --skip_stat_analysis --process_multi_keys
+```
