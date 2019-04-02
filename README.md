@@ -13,6 +13,7 @@
     - [ArmNN Neon data](#mobilenet_armnn_neon)
     - [ArmNN OpenCL data](#mobilenet_armnn_opencl)
     - [ArmNN Reference data](#mobilenet_armnn_reference)
+    - [Validate data](#mobilenet_validate)
 - [ResNet model](#resnet)
     - [TFLite data](#resnet_tflite) (reference)
     - [ArmNN Neon data](#resnet_armnn_neon)
@@ -183,6 +184,100 @@ $ ck benchmark program:image-classification-armnn-tflite \
 --record --record_repo=local --record_uoa=mlperf-mobilenet-armnn-tflite-accuracy \
 --tags=image-classification,mlperf,mobilenet,armnn-tflite,accuracy \
 --skip_print_timers --skip_stat_analysis --process_multi_keys
+```
+
+<a name="mobilenet_validate"></a>
+### Validate experimental data
+
+To validate the equivalence of the optimized ArmNN implementation versus the reference TFLite one,
+we collected experimental data as above on two platforms:
+- A Linaro [HiKey960](https://www.96boards.org/product/hikey960/) board (`hikey`): TFLite vs. ArmNN Neon vs. ArmNN OpenCL.
+- A Intel Xeon server (`velociti`): TFLite vs. ArmNN Reference.
+
+The resulting experimental entries were archived e.g. as follows:
+```bash
+hikey$ ck list local:experiment:mlperf-mobilenet*accuracy-500*
+mlperf-mobilenet-tflite-accuracy-500
+mlperf-mobilenet-armnn-tflite-accuracy-500-neon
+mlperf-mobilenet-armnn-tflite-accuracy-500-opencl
+hikey$ ck zip local:experiment:mlperf-mobilenet*accuracy-500* --archive_name=mlperf-mobilenet-accuracy-500-hikey.zip
+```
+The archives were then uploaded to DropBox.
+You can follow instructions below to download the archives and validate the accuracy.
+
+#### `hikey`: 500 images
+```bash
+$ wget https://www.dropbox.com/s/9lz7yncy1xtqlvj/mlperf-mobilenet-accuracy-500-hikey.zip
+$ ck add repo --zip=mlperf-mobilenet-accuracy-500-hikey.zip
+$ ck list --repo_uoa=mlperf-mobilenet-accuracy-500-hikey --print_full
+mlperf-mobilenet-accuracy-500-hikey:experiment:mlperf-mobilenet-armnn-tflite-accuracy-500-neon
+mlperf-mobilenet-accuracy-500-hikey:experiment:mlperf-mobilenet-tflite-accuracy-500
+mlperf-mobilenet-accuracy-500-hikey:experiment:mlperf-mobilenet-armnn-tflite-accuracy-500-opencl
+```
+##### TFLite vs. ArmNN Neon
+```bash
+$ ck compare_experiments mlperf \
+mlperf-mobilenet-accuracy-500-hikey:experiment:mlperf-mobilenet-tflite-accuracy-500 \
+mlperf-mobilenet-accuracy-500-hikey:experiment:mlperf-mobilenet-armnn-tflite-accuracy-500-neon
+...
+{'epsilon': 1e-05,
+ 'max_delta': 7.000000000034756e-06,
+ 'num_mismatched_classes': 0,
+ 'num_mismatched_elementary_keys': 0,
+ 'num_mismatched_files': 0,
+ 'num_mismatched_probabilities': 0,
+ 'return': 0}
+```
+##### TFLite vs. ArmNN OpenCL
+```bash
+$ ck compare_experiments mlperf \
+mlperf-mobilenet-accuracy-500-hikey:experiment:mlperf-mobilenet-tflite-accuracy-500 \
+mlperf-mobilenet-accuracy-500-hikey:experiment:mlperf-mobilenet-armnn-tflite-accuracy-500-opencl
+...
+{'epsilon': 1e-05,
+ 'max_delta': 9.000000000036756e-06,
+ 'num_mismatched_classes': 0,
+ 'num_mismatched_elementary_keys': 0,
+ 'num_mismatched_files': 0,
+ 'num_mismatched_probabilities': 0,
+ 'return': 0}
+```
+##### ArmNN Neon vs. ArmNN OpenCL
+```bash
+$ ck compare_experiments mlperf \
+mlperf-mobilenet-accuracy-500-hikey:experiment:mlperf-mobilenet-armnn-tflite-accuracy-500-neon \
+mlperf-mobilenet-accuracy-500-hikey:experiment:mlperf-mobilenet-armnn-tflite-accuracy-500-opencl
+...
+{'epsilon': 1e-05,
+ 'max_delta': 6.0000000000060005e-06,
+ 'num_mismatched_classes': 0,
+ 'num_mismatched_elementary_keys': 0,
+ 'num_mismatched_files': 0,
+ 'num_mismatched_probabilities': 0,
+ 'return': 0}
+```
+
+#### `velociti` - 500 images
+```bash
+$ wget https://www.dropbox.com/s/j2rdh3uzhz3lqh7/mlperf-mobilenet-accuracy-500-velociti.zip
+$ ck add repo --zip=mlperf-mobilenet-accuracy-500-velociti.zip
+$ ck list --repo_uoa=mlperf-mobilenet-accuracy-500-velociti --print_full
+mlperf-mobilenet-accuracy-500-velociti:experiment:mlperf-mobilenet-armnn-tflite-accuracy-500
+mlperf-mobilenet-accuracy-500-velociti:experiment:mlperf-mobilenet-tflite-accuracy-500
+```
+##### TFLite vs. ArmNN Reference
+```
+$ ck compare_experiments mlperf \
+mlperf-mobilenet-accuracy-500-velociti:experiment:mlperf-mobilenet-armnn-tflite-accuracy-500 \
+mlperf-mobilenet-accuracy-500-velociti:experiment:mlperf-mobilenet-tflite-accuracy-500
+...
+{'epsilon': 1e-05,
+ 'max_delta': 7.000000000090267e-06,
+ 'num_mismatched_classes': 0,
+ 'num_mismatched_elementary_keys': 0,
+ 'num_mismatched_files': 0,
+ 'num_mismatched_probabilities': 0,
+ 'return': 0}
 ```
 
 <a name="resnet"></a>
