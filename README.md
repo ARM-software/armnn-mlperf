@@ -103,8 +103,8 @@ $ ck benchmark program:image-classification-tflite \
 ```
 $ ck benchmark program:image-classification-tflite \
 --repetitions=1  --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=50000 \
---record --record_repo=local --record_uoa=mlperf-mobilenet-tflite-accuracy \
---tags=image-classification,mlperf,mobilenet,tflite,accuracy \
+--record --record_repo=local --record_uoa=mlperf-mobilenet-tflite-accuracy-50000 \
+--tags=image-classification,mlperf,mobilenet,tflite,accuracy,50000 \
 --skip_print_timers --skip_stat_analysis --process_multi_keys
 ```
 
@@ -137,8 +137,8 @@ $ ck benchmark program:image-classification-armnn-tflite --env.USE_NEON \
 ```
 $ ck benchmark program:image-classification-armnn-tflite --env.USE_NEON \
 --repetitions=1  --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=50000 \
---record --record_repo=local --record_uoa=mlperf-mobilenet-armnn-tflite-accuracy-neon \
---tags=image-classification,mlperf,mobilenet,armnn-tflite,accuracy,neon \
+--record --record_repo=local --record_uoa=mlperf-mobilenet-armnn-tflite-accuracy-50000-neon \
+--tags=image-classification,mlperf,mobilenet,armnn-tflite,accuracy,50000,neon \
 --skip_print_timers --skip_stat_analysis --process_multi_keys
 ```
 
@@ -158,8 +158,8 @@ $ ck benchmark program:image-classification-armnn-tflite --env.USE_OPENCL \
 ```
 $ ck benchmark program:image-classification-armnn-tflite --env.USE_OPENCL \
 --repetitions=1  --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=50000 \
---record --record_repo=local --record_uoa=mlperf-mobilenet-armnn-tflite-accuracy-opencl \
---tags=image-classification,mlperf,mobilenet,armnn-tflite,accuracy,opencl \
+--record --record_repo=local --record_uoa=mlperf-mobilenet-armnn-tflite-accuracy-50000-opencl \
+--tags=image-classification,mlperf,mobilenet,armnn-tflite,accuracy,50000,opencl \
 --skip_print_timers --skip_stat_analysis --process_multi_keys
 ```
 
@@ -181,8 +181,8 @@ $ ck benchmark program:image-classification-armnn-tflite \
 ```
 $ ck benchmark program:image-classification-armnn-tflite \
 --repetitions=1  --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=50000 \
---record --record_repo=local --record_uoa=mlperf-mobilenet-armnn-tflite-accuracy \
---tags=image-classification,mlperf,mobilenet,armnn-tflite,accuracy \
+--record --record_repo=local --record_uoa=mlperf-mobilenet-armnn-tflite-accuracy-50000 \
+--tags=image-classification,mlperf,mobilenet,armnn-tflite,accuracy,50000 \
 --skip_print_timers --skip_stat_analysis --process_multi_keys
 ```
 
@@ -305,8 +305,8 @@ $ ck benchmark program:image-classification-tflite \
 ```
 $ ck benchmark program:image-classification-tflite \
 --repetitions=1  --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=50000 \
---record --record_repo=local --record_uoa=mlperf-resnet-tflite-accuracy \
---tags=image-classification,mlperf,resnet,tflite,accuracy \
+--record --record_repo=local --record_uoa=mlperf-resnet-tflite-accuracy-50000 \
+--tags=image-classification,mlperf,resnet,tflite,accuracy,50000 \
 --skip_print_timers --skip_stat_analysis --process_multi_keys
 ```
 
@@ -326,8 +326,8 @@ $ ck benchmark program:image-classification-armnn-tflite --env.USE_NEON \
 ```
 $ ck benchmark program:image-classification-armnn-tflite --env.USE_NEON \
 --repetitions=1  --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=50000 \
---record --record_repo=local --record_uoa=mlperf-resnet-armnn-tflite-accuracy-neon \
---tags=image-classification,mlperf,resnet,armnn-tflite,accuracy,neon \
+--record --record_repo=local --record_uoa=mlperf-resnet-armnn-tflite-accuracy-50000-neon \
+--tags=image-classification,mlperf,resnet,armnn-tflite,accuracy,50000,neon \
 --skip_print_timers --skip_stat_analysis --process_multi_keys
 ```
 
@@ -347,8 +347,8 @@ $ ck benchmark program:image-classification-armnn-tflite --env.USE_OPENCL \
 ```
 $ ck benchmark program:image-classification-armnn-tflite --env.USE_OPENCL \
 --repetitions=1  --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=50000 \
---record --record_repo=local --record_uoa=mlperf-resnet-armnn-tflite-accuracy-opencl \
---tags=image-classification,mlperf,resnet,armnn-tflite,accuracy,opencl \
+--record --record_repo=local --record_uoa=mlperf-resnet-armnn-tflite-accuracy-50000-opencl \
+--tags=image-classification,mlperf,resnet,armnn-tflite,accuracy,50000,opencl \
 --skip_print_timers --skip_stat_analysis --process_multi_keys
 ```
 
@@ -368,7 +368,7 @@ $ ck benchmark program:image-classification-armnn-tflite \
 ```
 $ ck benchmark program:image-classification-armnn-tflite \
 --repetitions=1  --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=50000 \
---record --record_repo=local --record_uoa=mlperf-resnet-armnn-tflite-accuracy \
---tags=image-classification,mlperf,resnet,armnn-tflite,accuracy \
+--record --record_repo=local --record_uoa=mlperf-resnet-armnn-tflite-accuracy-50000 \
+--tags=image-classification,mlperf,resnet,armnn-tflite,accuracy,50000 \
 --skip_print_timers --skip_stat_analysis --process_multi_keys
 ```
