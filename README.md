@@ -259,6 +259,62 @@ mlperf-mobilenet-accuracy-500-hikey:experiment:mlperf-mobilenet-armnn-tflite-acc
  'return': 0}
 ```
 
+##### 50,000 images
+```bash
+$ wget https://www.dropbox.com/s/3cdi3lx7jfxwse7/mlperf-mobilenet-accuracy-50000-hikey.zip
+$ ck add repo --zip=mlperf-mobilenet-accuracy-50000-hikey.zip
+$ ck list --repo_uoa=mlperf-mobilenet-accuracy-50000-hikey --print_full
+mlperf-mobilenet-accuracy-50000-hikey:experiment:mlperf-mobilenet-armnn-tflite-accuracy-neon-50000
+mlperf-mobilenet-accuracy-50000-hikey:experiment:mlperf-mobilenet-tflite-accuracy-50000
+mlperf-mobilenet-accuracy-50000-hikey:experiment:mlperf-mobilenet-armnn-tflite-accuracy-opencl-50000
+```
+###### TFLite vs. ArmNN Neon
+```bash
+$ ck compare_experiments mlperf \
+mlperf-mobilenet-accuracy-50000-hikey:experiment:mlperf-mobilenet-tflite-accuracy-50000 \
+mlperf-mobilenet-accuracy-50000-hikey:experiment:mlperf-mobilenet-armnn-tflite-accuracy-neon-50000
+...
+{'epsilon': 1e-05,
+ 'max_delta': 1.3000000000040757e-05,
+ 'num_mismatched_classes': 10,
+ 'num_mismatched_elementary_keys': 0,
+ 'num_mismatched_files': 20,
+ 'num_mismatched_probabilities': 19,
+ 'return': 0}
+```
+###### TFLite vs. ArmNN OpenCL
+```bash
+$ ck compare_experiments mlperf \
+mlperf-mobilenet-accuracy-50000-hikey:experiment:mlperf-mobilenet-tflite-accuracy-50000 \
+mlperf-mobilenet-accuracy-50000-hikey:experiment:mlperf-mobilenet-armnn-tflite-accuracy-opencl-50000
+...
+{'epsilon': 1e-05,
+ 'max_delta': 1.4000000000014001e-05,
+ 'num_mismatched_classes': 8,
+ 'num_mismatched_elementary_keys': 0,
+ 'num_mismatched_files': 20,
+ 'num_mismatched_probabilities': 18,
+ 'return': 0}
+```
+###### ArmNN Neon vs. ArmNN OpenCL
+```bash
+$ ck compare_experiments mlperf \
+mlperf-mobilenet-accuracy-50000-hikey:experiment:mlperf-mobilenet-armnn-tflite-accuracy-neon-50000 \
+mlperf-mobilenet-accuracy-50000-hikey:experiment:mlperf-mobilenet-armnn-tflite-accuracy-opencl-50000
+...
+Checking ILSVRC2012_val_00033823.JPEG...
+- mismatched classes at index 2: 137 != 136
+- mismatched classes at index 3: 136 != 137
+...
+{'epsilon': 1e-05,
+ 'max_delta': 8.000000000008e-06,
+ 'num_mismatched_classes': 2,
+ 'num_mismatched_elementary_keys': 0,
+ 'num_mismatched_files': 1,
+ 'num_mismatched_probabilities': 0,
+ 'return': 0}
+```
+
 #### `velociti`
 ##### 500 images
 ```bash
