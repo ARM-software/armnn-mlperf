@@ -191,8 +191,8 @@ $ ck benchmark program:image-classification-armnn-tflite \
 
 To validate the equivalence of the optimized ArmNN implementation versus the reference TFLite one,
 we collected experimental data as above on two platforms:
-- A Linaro [HiKey960](https://www.96boards.org/product/hikey960/) board (`hikey`): TFLite vs. ArmNN Neon vs. ArmNN OpenCL.
-- A Intel Xeon server (`velociti`): TFLite vs. ArmNN Reference.
+- A Linaro [HiKey960](https://www.96boards.org/product/hikey960/) board (`hikey`): TFLite vs. ArmNN Neon vs. ArmNN OpenCL (500 and 50,000 images).
+- An Intel Xeon server (`velociti`): TFLite vs. ArmNN Reference (500 and 50,000 images).
 
 The resulting experimental entries were archived e.g. as follows:
 ```bash
@@ -446,11 +446,137 @@ $ ck benchmark program:image-classification-armnn-tflite \
 --skip_print_timers --skip_stat_analysis --process_multi_keys
 ```
 
-#### Run on 50,000 images
+#### Run on 50,000 images (**NOT RUN**)
 ```
 $ ck benchmark program:image-classification-armnn-tflite \
 --repetitions=1  --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=50000 \
 --record --record_repo=local --record_uoa=mlperf-resnet-armnn-tflite-accuracy-50000 \
 --tags=image-classification,mlperf,resnet,armnn-tflite,accuracy,50000 \
 --skip_print_timers --skip_stat_analysis --process_multi_keys
+```
+
+<a name="resnet_validate"></a>
+### Validate experimental data
+
+To validate the equivalence of the optimized ArmNN implementation versus the reference TFLite one,
+we collected experimental data as above on two platforms:
+- A Linaro [HiKey960](https://www.96boards.org/product/hikey960/) board (`hikey`): TFLite vs. ArmNN Neon vs. ArmNN OpenCL (500 and 50,000 images).
+- An Intel Xeon server (`velociti`): TFLite vs. ArmNN Reference (500 images only).
+
+The resulting experimental entries were archived e.g. as follows:
+```bash
+hikey$ ck list local:experiment:mlperf-resnet*accuracy*500
+mlperf-resnet-tflite-accuracy-500
+mlperf-resnet-armnn-tflite-accuracy-neon-500
+mlperf-resnet-armnn-tflite-accuracy-opencl-500
+hikey$ ck zip local:experiment:mlperf-resnet*accuracy*500 \
+                --archive_name=mlperf-resnet-accuracy-500-hikey.zip
+```
+The archives were then uploaded to DropBox.
+You can follow instructions below to download the archives and validate the accuracy.
+
+#### `hikey`
+##### 500 images
+```bash
+$ wget https://www.dropbox.com/s/eod0bflxxzpudmr/mlperf-resnet-accuracy-500-hikey.zip
+$ ck add repo --zip=mlperf-resnet-accuracy-500-hikey.zip
+$ ck list --repo_uoa=mlperf-resnet-accuracy-500-hikey --print_full
+mlperf-resnet-accuracy-500-hikey:experiment:mlperf-resnet-armnn-tflite-accuracy-neon-500
+mlperf-resnet-accuracy-500-hikey:experiment:mlperf-resnet-armnn-tflite-accuracy-opencl-500
+mlperf-resnet-accuracy-500-hikey:experiment:mlperf-resnet-tflite-accuracy-500
+```
+###### TFLite vs. ArmNN Neon
+```bash
+$ ck compare_experiments mlperf \
+mlperf-resnet-accuracy-500-hikey:experiment:mlperf-resnet-tflite-accuracy-500 \
+mlperf-resnet-accuracy-500-hikey:experiment:mlperf-resnet-armnn-tflite-accuracy-neon-500
+...
+{'epsilon': 1e-05,
+ 'max_delta': 1.0999999999983245e-05,
+ 'num_mismatched_classes': 0,
+ 'num_mismatched_elementary_keys': 0,
+ 'num_mismatched_files': 2,
+ 'num_mismatched_probabilities': 3,
+ 'return': 0}
+```
+###### TFLite vs. ArmNN OpenCL
+```bash
+$ ck compare_experiments mlperf \
+mlperf-resnet-accuracy-500-hikey:experiment:mlperf-resnet-tflite-accuracy-500 \
+mlperf-resnet-accuracy-500-hikey:experiment:mlperf-resnet-armnn-tflite-accuracy-opencl-500
+...
+{'epsilon': 1e-05,
+ 'max_delta': 1.0999999999983245e-05,
+ 'num_mismatched_classes': 0,
+ 'num_mismatched_elementary_keys': 0,
+ 'num_mismatched_files': 3,
+ 'num_mismatched_probabilities': 4,
+ 'return': 0}
+```
+###### ArmNN Neon vs. ArmNN OpenCL
+```bash
+$ ck compare_experiments mlperf \
+mlperf-resnet-accuracy-500-hikey:experiment:mlperf-resnet-armnn-tflite-accuracy-neon-500 \
+mlperf-resnet-accuracy-500-hikey:experiment:mlperf-resnet-armnn-tflite-accuracy-opencl-500
+...
+{'epsilon': 1e-05,
+ 'max_delta': 6.0000000000060005e-06,
+ 'num_mismatched_classes': 0,
+ 'num_mismatched_elementary_keys': 0,
+ 'num_mismatched_files': 0,
+ 'num_mismatched_probabilities': 0,
+ 'return': 0}
+```
+
+##### 50,000 images
+```bash
+$ wget ...
+$ ck add repo --zip=mlperf-resnet-accuracy-50000-hikey.zip
+$ ck list --repo_uoa=mlperf-resnet-accuracy-50000-hikey --print_full
+...
+```
+###### TFLite vs. ArmNN Neon
+```bash
+$ ck compare_experiments mlperf \
+mlperf-resnet-accuracy-50000-hikey:experiment:mlperf-resnet-tflite-accuracy-50000 \
+mlperf-resnet-accuracy-50000-hikey:experiment:mlperf-resnet-armnn-tflite-accuracy-neon-50000
+...
+```
+###### TFLite vs. ArmNN OpenCL
+```bash
+$ ck compare_experiments mlperf \
+mlperf-resnet-accuracy-50000-hikey:experiment:mlperf-resnet-tflite-accuracy-50000 \
+mlperf-resnet-accuracy-50000-hikey:experiment:mlperf-resnet-armnn-tflite-accuracy-opencl-50000
+...
+```
+###### ArmNN Neon vs. ArmNN OpenCL
+```bash
+$ ck compare_experiments mlperf \
+mlperf-resnet-accuracy-50000-hikey:experiment:mlperf-resnet-armnn-tflite-accuracy-neon-50000 \
+mlperf-resnet-accuracy-50000-hikey:experiment:mlperf-resnet-armnn-tflite-accuracy-opencl-50000
+...
+```
+
+#### `velociti`
+##### 500 images
+```bash
+$ wget https://www.dropbox.com/s/1jv4lpfp1ddr2j7/mlperf-resnet-accuracy-500-velociti.zip
+$ ck add repo --zip=mlperf-resnet-accuracy-500-velociti.zip
+$ ck list --repo_uoa=mlperf-resnet-accuracy-500-velociti --print_full
+mlperf-resnet-accuracy-500-velociti:experiment:mlperf-resnet-armnn-tflite-accuracy-500
+mlperf-resnet-accuracy-500-velociti:experiment:mlperf-resnet-tflite-accuracy-500
+```
+###### TFLite vs. ArmNN Reference
+```
+$ ck compare_experiments mlperf \
+mlperf-resnet-accuracy-500-velociti:experiment:mlperf-resnet-armnn-tflite-accuracy-500 \
+mlperf-resnet-accuracy-500-velociti:experiment:mlperf-resnet-tflite-accuracy-500
+...
+{'epsilon': 1e-05,
+ 'max_delta': 3.0000000000030003e-06,
+ 'num_mismatched_classes': 0,
+ 'num_mismatched_elementary_keys': 0,
+ 'num_mismatched_files': 0,
+ 'num_mismatched_probabilities': 0,
+ 'return': 0}
 ```
