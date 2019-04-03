@@ -438,7 +438,7 @@ $ ck benchmark program:image-classification-armnn-tflite --env.USE_OPENCL \
 <a name="resnet_armnn_reference"></a>
 ### ArmNN Reference data (**NOT RECOMMENDED**)
 
-**NB:** This validation can run on x86 or arm. However, it is completely unoptimized and hence extremely slow (e.g. **TBC** seconds per image on a Linaro HiKey960 board or 16.9 seconds per image on an Intel Xeon server).
+**NB:** This validation can run on x86 or arm. However, it is completely unoptimized and hence extremely slow (e.g. 34.8 seconds per image on a Linaro HiKey960 board or 16.9 seconds per image on an Intel Xeon server).
 
 #### Run on 500 images
 ```
