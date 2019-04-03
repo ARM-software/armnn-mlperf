@@ -1,0 +1,21 @@
+{
+  "backup_data_uid": "d815e1c7562c4c1a",
+  "backup_module_uid": "b0ac08fe1d3c2615",
+  "backup_module_uoa": "program",
+  "control": {
+    "author": "cTuning foundation",
+    "author_email": "admin@cTuning.org",
+    "author_webpage": "http://cTuning.org",
+    "copyright": "See COPYRIGHT.txt for copyright details",
+    "engine": "CK",
+    "iso_datetime": "2019-03-11T16:55:29.300328",
+    "license": "See LICENSE.txt for licensing details",
+    "version": [
+      "1",
+      "9",
+      "6",
+      "1"
+    ]
+  },
+  "data_name": "image-classification-armnn-tf"
+}
