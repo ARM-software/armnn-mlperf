@@ -533,10 +533,12 @@ mlperf-resnet-accuracy-500-hikey:experiment:mlperf-resnet-armnn-tflite-accuracy-
 
 ##### 50,000 images
 ```bash
-$ wget ...
+$ wget https://www.dropbox.com/s/1yzv6unriqs18yb/mlperf-resnet-accuracy-50000-hikey.zip
 $ ck add repo --zip=mlperf-resnet-accuracy-50000-hikey.zip
 $ ck list --repo_uoa=mlperf-resnet-accuracy-50000-hikey --print_full
-...
+mlperf-resnet-accuracy-50000-hikey:experiment:mlperf-resnet-armnn-tflite-accuracy-opencl-50000
+mlperf-resnet-accuracy-50000-hikey:experiment:mlperf-resnet-armnn-tflite-accuracy-neon-50000
+mlperf-resnet-accuracy-50000-hikey:experiment:mlperf-resnet-tflite-accuracy-50000
 ```
 ###### TFLite vs. ArmNN Neon
 ```bash
@@ -544,6 +546,13 @@ $ ck compare_experiments mlperf \
 mlperf-resnet-accuracy-50000-hikey:experiment:mlperf-resnet-tflite-accuracy-50000 \
 mlperf-resnet-accuracy-50000-hikey:experiment:mlperf-resnet-armnn-tflite-accuracy-neon-50000
 ...
+{'epsilon': 1e-05,
+ 'max_delta': 2.4000000000024002e-05,
+ 'num_mismatched_classes': 6,
+ 'num_mismatched_elementary_keys': 0,
+ 'num_mismatched_files': 107,
+ 'num_mismatched_probabilities': 153,
+ 'return': 0}
 ```
 ###### TFLite vs. ArmNN OpenCL
 ```bash
@@ -551,6 +560,13 @@ $ ck compare_experiments mlperf \
 mlperf-resnet-accuracy-50000-hikey:experiment:mlperf-resnet-tflite-accuracy-50000 \
 mlperf-resnet-accuracy-50000-hikey:experiment:mlperf-resnet-armnn-tflite-accuracy-opencl-50000
 ...
+{'epsilon': 1e-05,
+ 'max_delta': 2.5000000000052758e-05,
+ 'num_mismatched_classes': 4,
+ 'num_mismatched_elementary_keys': 0,
+ 'num_mismatched_files': 147,
+ 'num_mismatched_probabilities': 190,
+ 'return': 0}
 ```
 ###### ArmNN Neon vs. ArmNN OpenCL
 ```bash
@@ -558,6 +574,13 @@ $ ck compare_experiments mlperf \
 mlperf-resnet-accuracy-50000-hikey:experiment:mlperf-resnet-armnn-tflite-accuracy-neon-50000 \
 mlperf-resnet-accuracy-50000-hikey:experiment:mlperf-resnet-armnn-tflite-accuracy-opencl-50000
 ...
+{'epsilon': 1e-05,
+ 'max_delta': 1.0000000000010001e-05,
+ 'num_mismatched_classes': 6,
+ 'num_mismatched_elementary_keys': 0,
+ 'num_mismatched_files': 5,
+ 'num_mismatched_probabilities': 2,
+ 'return': 0}
 ```
 
 #### `velociti`
