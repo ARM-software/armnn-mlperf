@@ -206,7 +206,8 @@ hikey$ ck zip local:experiment:mlperf-mobilenet*accuracy*500 \
 The archives were then uploaded to DropBox.
 You can follow instructions below to download the archives and validate the accuracy.
 
-#### `hikey`: 500 images
+#### `hikey`
+##### 500 images
 ```bash
 $ wget https://www.dropbox.com/s/9lz7yncy1xtqlvj/mlperf-mobilenet-accuracy-500-hikey.zip
 $ ck add repo --zip=mlperf-mobilenet-accuracy-500-hikey.zip
@@ -215,7 +216,7 @@ mlperf-mobilenet-accuracy-500-hikey:experiment:mlperf-mobilenet-armnn-tflite-acc
 mlperf-mobilenet-accuracy-500-hikey:experiment:mlperf-mobilenet-tflite-accuracy-500
 mlperf-mobilenet-accuracy-500-hikey:experiment:mlperf-mobilenet-armnn-tflite-accuracy-opencl-500
 ```
-##### TFLite vs. ArmNN Neon
+###### TFLite vs. ArmNN Neon
 ```bash
 $ ck compare_experiments mlperf \
 mlperf-mobilenet-accuracy-500-hikey:experiment:mlperf-mobilenet-tflite-accuracy-500 \
@@ -229,7 +230,7 @@ mlperf-mobilenet-accuracy-500-hikey:experiment:mlperf-mobilenet-armnn-tflite-acc
  'num_mismatched_probabilities': 0,
  'return': 0}
 ```
-##### TFLite vs. ArmNN OpenCL
+###### TFLite vs. ArmNN OpenCL
 ```bash
 $ ck compare_experiments mlperf \
 mlperf-mobilenet-accuracy-500-hikey:experiment:mlperf-mobilenet-tflite-accuracy-500 \
@@ -243,7 +244,7 @@ mlperf-mobilenet-accuracy-500-hikey:experiment:mlperf-mobilenet-armnn-tflite-acc
  'num_mismatched_probabilities': 0,
  'return': 0}
 ```
-##### ArmNN Neon vs. ArmNN OpenCL
+###### ArmNN Neon vs. ArmNN OpenCL
 ```bash
 $ ck compare_experiments mlperf \
 mlperf-mobilenet-accuracy-500-hikey:experiment:mlperf-mobilenet-armnn-tflite-accuracy-neon-500 \
@@ -258,7 +259,8 @@ mlperf-mobilenet-accuracy-500-hikey:experiment:mlperf-mobilenet-armnn-tflite-acc
  'return': 0}
 ```
 
-#### `velociti` - 500 images
+#### `velociti`
+##### 500 images
 ```bash
 $ wget https://www.dropbox.com/s/j2rdh3uzhz3lqh7/mlperf-mobilenet-accuracy-500-velociti.zip
 $ ck add repo --zip=mlperf-mobilenet-accuracy-500-velociti.zip
@@ -266,7 +268,7 @@ $ ck list --repo_uoa=mlperf-mobilenet-accuracy-500-velociti --print_full
 mlperf-mobilenet-accuracy-500-velociti:experiment:mlperf-mobilenet-armnn-tflite-accuracy-500
 mlperf-mobilenet-accuracy-500-velociti:experiment:mlperf-mobilenet-tflite-accuracy-500
 ```
-##### TFLite vs. ArmNN Reference
+###### TFLite vs. ArmNN Reference
 ```
 $ ck compare_experiments mlperf \
 mlperf-mobilenet-accuracy-500-velociti:experiment:mlperf-mobilenet-armnn-tflite-accuracy-500 \
@@ -278,6 +280,29 @@ mlperf-mobilenet-accuracy-500-velociti:experiment:mlperf-mobilenet-tflite-accura
  'num_mismatched_elementary_keys': 0,
  'num_mismatched_files': 0,
  'num_mismatched_probabilities': 0,
+ 'return': 0}
+```
+
+##### 50,000 images
+```bash
+$ wget https://www.dropbox.com/s/z5bx7aeocwdyrww/mlperf-mobilenet-accuracy-50000-velociti.zip
+$ ck add repo --zip=mlperf-mobilenet-accuracy-50000-velociti.zip
+$ ck list --repo_uoa=mlperf-mobilenet-accuracy-50000-velociti --print_full
+mlperf-mobilenet-accuracy-50000-velociti:experiment:mlperf-mobilenet-armnn-tflite-accuracy-50000
+mlperf-mobilenet-accuracy-50000-velociti:experiment:mlperf-mobilenet-tflite-accuracy-50000
+```
+###### TFLite vs. ArmNN Reference
+```
+$ ck compare_experiments mlperf \
+mlperf-mobilenet-accuracy-50000-velociti:experiment:mlperf-mobilenet-armnn-tflite-accuracy-50000 \
+mlperf-mobilenet-accuracy-50000-velociti:experiment:mlperf-mobilenet-tflite-accuracy-50000
+...
+{'epsilon': 1e-05,
+ 'max_delta': 1.2000000000012001e-05,
+ 'num_mismatched_classes': 2,
+ 'num_mismatched_elementary_keys': 0,
+ 'num_mismatched_files': 14,
+ 'num_mismatched_probabilities': 17,
  'return': 0}
 ```
 
