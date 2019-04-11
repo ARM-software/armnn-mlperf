@@ -382,15 +382,17 @@ Please select the package to install [ hit return for "0" ]:
 Option 0 will download a TFLite model preconverted from the TF model.  During
 the conversion, the `ArgMax` operator causing an
 [issue](https://github.com/ARM-software/armnn/issues/150) with ArmNN v19.02 was
-omitted.
+excluded.
 
 Option 1 will download a TFLite model preconverted from the TF model, but
 including the `ArgMax` operator. This variant can be used once the above issue
 is resolved.
 
-Option 2 will download the TF model and convert it to TFLite.  Since the
-conversion relies on a prebuilt version of TF, this option is only viable on x86.
-(This constraint can be relaxed, but building TF on Arm [is not officially supported](https://github.com/tensorflow/tensorflow/issues/25607#issuecomment-466583730).)
+Option 2 will download the TF model and convert it to TFLite, while excluding
+the `ArgMax` operator.  Since the conversion relies on a prebuilt version of
+TF, this option is only viable on x86.  (This constraint can be relaxed, but
+building TF on Arm [is not officially
+supported](https://github.com/tensorflow/tensorflow/issues/25607#issuecomment-466583730).)
 
 <a name="resnet_tflite"></a>
 ### TFLite data (reference)
