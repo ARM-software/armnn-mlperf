@@ -4,6 +4,14 @@
   "data_alias": "armnn-mlperf",
   "data_name": "armnn-mlperf",
   "dict": {
+    "repo_deps": [
+      {
+        "repo_uoa": "ck-armnn"
+      },
+      {
+        "repo_uoa": "ck-mlperf"
+      }
+    ],
     "shared": "git",
     "url": "https://github.com/arm-software/armnn-mlperf"
   }

@@ -27,9 +27,10 @@
 <a name="repos"></a>
 ## Pull CK repositories
 ```
-$ ck pull repo:armnn-mlperf --url=https://github.com/arm-software/armnn-mlperf
-$ ck pull repo:ck-mlperf
-$ ck pull repo:ck-armnn
+$ ck pull repo --url=https://github.com/arm-software/armnn-mlperf
+$ ck list repo:*armnn*
+armnn-mlperf
+ck-armnn
 ```
 
 <a name="tflite"></a>
