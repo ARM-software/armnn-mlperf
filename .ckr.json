@@ -1,10 +1,10 @@
 {
-  "data_uoa": "arm-mlperf",
+  "data_uoa": "armnn-mlperf",
   "data_uid": "28d34dd08a524be2",
-  "data_alias": "arm-mlperf",
-  "data_name": "arm-mlperf",
+  "data_alias": "armnn-mlperf",
+  "data_name": "armnn-mlperf",
   "dict": {
     "shared": "git",
-    "url": "git@github.com:ARM-software/mlperf.git"
+    "url": "https://github.com/arm-software/armnn-mlperf"
   }
 }
