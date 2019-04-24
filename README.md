@@ -139,7 +139,7 @@ $ ck benchmark program:image-classification-armnn-tflite --env.USE_NEON \
 ```
 $ ck benchmark program:image-classification-armnn-tflite --env.USE_NEON \
 --repetitions=1  --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=50000 \
---record --record_repo=local --record_uoa=mlperf-mobilenet-armnn-tflite-accuracy-50000-neon \
+--record --record_repo=local --record_uoa=mlperf-mobilenet-armnn-tflite-accuracy-neon-50000 \
 --tags=image-classification,mlperf,mobilenet,armnn-tflite,accuracy,neon,50000 \
 --skip_print_timers --skip_stat_analysis --process_multi_keys
 ```
@@ -433,7 +433,7 @@ $ ck benchmark program:image-classification-armnn-tflite --env.USE_NEON \
 ```
 $ ck benchmark program:image-classification-armnn-tflite --env.USE_NEON \
 --repetitions=1  --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=50000 \
---record --record_repo=local --record_uoa=mlperf-resnet-armnn-tflite-accuracy-50000-neon \
+--record --record_repo=local --record_uoa=mlperf-resnet-armnn-tflite-accuracy-neon-50000 \
 --tags=image-classification,mlperf,resnet,armnn-tflite,accuracy,neon,50000 \
 --skip_print_timers --skip_stat_analysis --process_multi_keys
 ```
