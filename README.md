@@ -1,5 +1,7 @@
 # [Arm NN](https://developer.arm.com/ip-products/processors/machine-learning/arm-nn) ports for [MLPerf Inference](https://github.com/mlperf/inference) benchmarks
 
+[![compatibility](https://github.com/ctuning/ck-guide-images/blob/master/ck-compatible.svg)](https://github.com/ctuning/ck)
+
 - [Getting started](#getting_started)
     - [Pull CK repositories](#repos)
     - [Install TFLite](#tflite)
