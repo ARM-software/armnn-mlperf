@@ -10,19 +10,22 @@
         - [with TFLite and Neon support](#armnn_tflite_neon)
         - [with TFLite and OpenCL support](#armnn_tflite_opencl)
         - [with TFLite and Reference support](#armnn_tflite_reference)
-    - [Download ImageNet validation dataset](#imagenet)
-- [MobileNet model](#mobilenet)
-    - [TFLite data](#mobilenet_tflite) (reference)
-    - [ArmNN Neon data](#mobilenet_armnn_neon)
-    - [ArmNN OpenCL data](#mobilenet_armnn_opencl)
-    - [ArmNN Reference data](#mobilenet_armnn_reference)
-    - [Validate data](#mobilenet_validate)
-- [ResNet model](#resnet)
-    - [TFLite data](#resnet_tflite) (reference)
-    - [ArmNN Neon data](#resnet_armnn_neon)
-    - [ArmNN OpenCL data](#resnet_armnn_opencl)
-    - [ArmNN Reference data](#resnet_armnn_reference)
-    - [Validate data](#resnet_validate)
+- [Image classification](#image_classification)
+    - [Download the ImageNet 2012 validation dataset](#imagenet)
+    - [MobileNet model](#mobilenet)
+        - [TFLite data](#mobilenet_tflite) (reference)
+        - [ArmNN Neon data](#mobilenet_armnn_neon)
+        - [ArmNN OpenCL data](#mobilenet_armnn_opencl)
+        - [ArmNN Reference data](#mobilenet_armnn_reference)
+        - [Validate data](#mobilenet_validate)
+    - [ResNet model](#resnet)
+        - [TFLite data](#resnet_tflite) (reference)
+        - [ArmNN Neon data](#resnet_armnn_neon)
+        - [ArmNN OpenCL data](#resnet_armnn_opencl)
+        - [ArmNN Reference data](#resnet_armnn_reference)
+        - [Validate data](#resnet_validate)
+- [Object detection](#object_detection)
+    - [Download the COCO 2017 validation dataset](#coco)
 
 <a name="getting_started"></a>
 # Getting started
@@ -74,8 +77,11 @@ $ ck install package --tags=lib,armnn,tflite,neon,rel.19.02
 $ ck install package --tags=lib,armnn,tflite,opencl,rel.19.02
 ```
 
+<a name="image_classification"></a>
+# Image classification
+
 <a name="imagenet"></a>
-## Download ImageNet validation dataset
+## Download the ImageNet 2012 validation dataset
 
 ### Full (50,000 images)
 ```
@@ -636,4 +642,13 @@ mlperf-resnet-accuracy-500-velociti:experiment:mlperf-resnet-tflite-accuracy-500
  'num_mismatched_files': 0,
  'num_mismatched_probabilities': 0,
  'return': 0}
+```
+
+<a name="object_detection"></a>
+# Object detection
+
+<a name="coco"></a>
+## Download the COCO 2017 validation dataset
+```bash
+$ ck install package:dataset-coco-2017-val
 ```
