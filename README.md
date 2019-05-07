@@ -2,15 +2,15 @@
 
 [![compatibility](https://github.com/ctuning/ck-guide-images/blob/master/ck-compatible.svg)](https://github.com/ctuning/ck)
 
-- [Getting started](#getting_started)
-    - [Install CK](#ck)
-    - [Pull CK repositories](#repos)
-    - [Install TFLite](#tflite)
-    - [Install ArmNN](#armnn)
-        - [with TFLite, Neon and OpenCL support](#armnn_tflite_neon_opencl) (**recommended**)
-        - [with TFLite and Neon support](#armnn_tflite_neon)
-        - [with TFLite and OpenCL support](#armnn_tflite_opencl)
-        - [with TFLite and Reference support](#armnn_tflite_reference)
+- [Getting started](#gs)
+    - [Install CK](#gs_ck)
+    - [Pull CK repositories](#gs_repos)
+    - [Install TFLite](#gs_tflite)
+    - [Install ArmNN](#gs_armnn)
+        - [with TFLite, Neon and OpenCL support](#gs_armnn_tflite_neon_opencl) (**recommended**)
+        - [with TFLite and Neon support](#gs_armnn_tflite_neon)
+        - [with TFLite and OpenCL support](#gs_armnn_tflite_opencl)
+        - [with TFLite and Reference support](#gs_armnn_tflite_reference)
 - [Image classification](#image_classification)
     - [Download the ImageNet 2012 validation dataset](#imagenet)
     - [MobileNet](#mobilenet)
@@ -35,14 +35,14 @@
         - [TFLite data](#ssd_mobilenet_tflite) (reference)
 
 
-<a name="getting_started"></a>
+<a name="gs"></a>
 # Getting started
 
-<a name="ck"></a>
+<a name="gs_ck"></a>
 ## Install CK
 Please follow the [CK installation instructions](https://github.com/ctuning/ck#installation).
 
-<a name="repos"></a>
+<a name="gs_repos"></a>
 ## Pull CK repositories
 ```
 $ ck pull repo --url=https://github.com/arm-software/armnn-mlperf
@@ -58,38 +58,38 @@ armnn-mlperf
 $ ck pull all
 ```
 
-<a name="tflite"></a>
+<a name="gs_tflite"></a>
 ## Install TFLite
 ```
 $ ck install package --tags=lib,tflite,v1.13
 ```
 
-<a name="armnn"></a>
+<a name="gs_armnn"></a>
 ## Install ArmNN
 To install ArmNN with full support (frontends: TF, TFLite, ONNX; backends: Reference, OpenCL, Neon):
 ```
 $ ck install package --tags=lib,armnn,tf,tflite,onnx,neon,opencl,rel.19.02
 ```
 
-If you would like to save time, you can only build with TFLite frontend support only using one of the backend options below.
+If you would like to save time, you can build with TFLite frontend support only using one of the backend options below.
 For more details, please refer to the [CK-ArmNN](http://github.com/ctuning/ck-armnn) repository.
 
-<a name="armnn_tflite_neon_opencl"></a>
+<a name="gs_armnn_tflite_neon_opencl"></a>
 ### Option 1: Install ArmNN with TFLite, Neon and OpenCL support (**recommended**)
 ```
 $ ck install package --tags=lib,armnn,tflite,neon,opencl,rel.19.02
 ```
-<a name="armnn_tflite_neon"></a>
+<a name="gs_armnn_tflite_neon"></a>
 ### Option 2: Install ArmNN with TFLite and Neon support
 ```
 $ ck install package --tags=lib,armnn,tflite,neon,rel.19.02
 ```
-<a name="armnn_tflite_opencl"></a>
+<a name="gs_armnn_tflite_opencl"></a>
 ### Option 3: Install ArmNN with TFLite and OpenCL support
 ```
 $ ck install package --tags=lib,armnn,tflite,opencl,rel.19.02
 ```
-<a name="armnn_tflite_reference"></a>
+<a name="gs_armnn_tflite_reference"></a>
 ### Option 4: ArmNN with TFLite and Reference support
 ```
 $ ck install package --tags=lib,armnn,tflite,rel.19.02
@@ -690,7 +690,7 @@ $ ck find program:object-detection-armnn-tflite
 ```
 
 ### TFLite
-SSD requires TFLite 1.13.1.
+The SSD models require TFLite 1.13.1.
 
 ### Python 3
 
