@@ -33,6 +33,9 @@
     - [SSD-MobileNet](#ssd_mobilenet)
         - [Model](#ssd_mobilenet_model)
         - [TFLite data](#ssd_mobilenet_tflite) (reference)
+        - [ArmNN Neon data](#ssd_mobilenet_armnn_neon)
+        - [ArmNN OpenCL data](#ssd_mobilenet_armnn_opencl)
+        - [Validate data](#ssd_mobilenet_validate)
 
 
 <a name="gs"></a>
@@ -722,6 +725,16 @@ $ CK_PYTHON=python3 ck benchmark program:object-detection-tflite \
 --skip_print_timers --skip_stat_analysis --process_multi_keys
 ```
 
+<a name="ssd_mobilenet_armnn_neon"></a>
+### ArmNN Neon data
+```bash
+$ CK_PYTHON=python3 ck benchmark program:object-detection-armnn-tflite --env.USE_NEON \
+--repetitions=1 --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=5000 --env.CK_METRIC_TYPE=COCO \
+--record --record_repo=local --record_uoa=mlperf-object-detection-ssd-mobilenet-armnn-tflite-accuracy-neon \
+--tags=mlperf,object-detection,ssd-mobilenet,armnn-tflite,accuracy,neon \
+--skip_print_timers --skip_stat_analysis --process_multi_keys
+```
+
 <a name="ssd_mobilenet_armnn_opencl"></a>
 ### ArmNN OpenCL data
 ```bash
@@ -731,3 +744,20 @@ $ CK_PYTHON=python3 ck benchmark program:object-detection-armnn-tflite --env.USE
 --tags=mlperf,object-detection,ssd-mobilenet,armnn-tflite,accuracy,opencl \
 --skip_print_timers --skip_stat_analysis --process_multi_keys
 ```
+
+<a name="ssd_mobilenet_validate"></a>
+### Validate experimental data
+
+To validate the equivalence of the optimized ArmNN implementation versus the reference TFLite one,
+we collected experimental data as above on:
+- A Linaro [HiKey960](https://www.96boards.org/product/hikey960/) board (`hikey`): TFLite vs. ArmNN Neon vs. ArmNN OpenCL.
+
+The resulting experimental entries were archived e.g. as follows:
+```bash
+hikey$ ck list local:experiment:mlperf-object-detection-ssd-mobilenet*accuracy*
+...
+hikey$ ck zip local:experiment:mlperf-object-detection-ssd-mobilenet*accuracy* \
+                --archive_name=mlperf-object-detection-ssd-mobilenet-accuracy-hikey.zip
+```
+The archives were then uploaded to DropBox.
+You can follow instructions below to download the archives and validate the accuracy.
