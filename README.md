@@ -73,6 +73,12 @@ To install ArmNN with full support (frontends: TF, TFLite, ONNX; backends: Refer
 ```
 $ ck install package --tags=lib,armnn,tf,tflite,onnx,neon,opencl,rel.19.02
 ```
+**NB:** On a platform with only a couple of GB of RAM, you way wish to restrict
+the number of CPU build threads e.g. as follows:
+```
+$ ck install package --tags=lib,armnn,tflite,neon,opencl,rel.19.02 \
+--env.CK_HOST_CPU_NUMBER_OF_PROCESSORS=4
+```
 
 If you would like to save time, you can build with TFLite frontend support only using one of the backend options below.
 For more details, please refer to the [CK-ArmNN](http://github.com/ctuning/ck-armnn) repository.
