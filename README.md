@@ -12,13 +12,15 @@
         - [with TFLite and Reference support](#armnn_tflite_reference)
 - [Image classification](#image_classification)
     - [Download the ImageNet 2012 validation dataset](#imagenet)
-    - [MobileNet model](#mobilenet)
+    - [MobileNet](#mobilenet)
+        - [Model](#mobilenet_model)
         - [TFLite data](#mobilenet_tflite) (reference)
         - [ArmNN Neon data](#mobilenet_armnn_neon)
         - [ArmNN OpenCL data](#mobilenet_armnn_opencl)
         - [ArmNN Reference data](#mobilenet_armnn_reference)
         - [Validate data](#mobilenet_validate)
-    - [ResNet model](#resnet)
+    - [ResNet](#resnet)
+        - [Model](#resnet_model)
         - [TFLite data](#resnet_tflite) (reference)
         - [ArmNN Neon data](#resnet_armnn_neon)
         - [ArmNN OpenCL data](#resnet_armnn_opencl)
@@ -26,6 +28,10 @@
         - [Validate data](#resnet_validate)
 - [Object detection](#object_detection)
     - [Download the COCO 2017 validation dataset](#coco)
+    - [SSD-MobileNet](#ssd_mobilenet)
+        - [Model](#ssd_mobilenet_model)
+        - [TFLite data](#ssd_mobilenet_tflite) (reference)
+
 
 <a name="getting_started"></a>
 # Getting started
@@ -103,6 +109,8 @@ $ ck install package:imagenet-2012-val-min
 <a name="mobilenet"></a>
 ## MobileNet
 
+<a name="mobilenet_model"></a>
+### Model
 Install the MobileNet model:
 ```
 $ ck install package --tags=model,tflite,mlperf,mobilenet,non-quantized
@@ -387,6 +395,8 @@ mlperf-mobilenet-accuracy-50000-velociti:experiment:mlperf-mobilenet-tflite-accu
 <a name="resnet"></a>
 ## ResNet
 
+<a name="resnet_model"></a>
+### Model
 Install the ResNet model:
 ```
 $ ck install package --tags=model,tflite,mlperf,resnet
@@ -659,3 +669,17 @@ mlperf-resnet-accuracy-500-velociti:experiment:mlperf-resnet-tflite-accuracy-500
 ```bash
 $ ck install package:dataset-coco-2017-val
 ```
+
+<a name="ssd_mobilenet"></a>
+## SSD-MobileNet
+
+<a name"ssd_mobilenet_model"><a/>
+### Model
+Install the SSD-MobileNet model:
+```
+$ ck install package --tags=model,tflite,mlperf,object-detection,ssd-mobilenet
+```
+
+<a name"ssd_mobilenet_tflite"><a/>
+### TFLite data (reference)
+
