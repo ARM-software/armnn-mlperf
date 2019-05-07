@@ -3,6 +3,7 @@
 [![compatibility](https://github.com/ctuning/ck-guide-images/blob/master/ck-compatible.svg)](https://github.com/ctuning/ck)
 
 - [Getting started](#getting_started)
+    - [Install CK](#ck)
     - [Pull CK repositories](#repos)
     - [Install TFLite](#tflite)
     - [Install ArmNN](#armnn)
@@ -25,6 +26,10 @@
 
 <a name="getting_started"></a>
 # Getting started
+
+<a name="ck"></a>
+## Install CK
+Please follow the [CK installation instructions](https://github.com/ctuning/ck#installation).
 
 <a name="repos"></a>
 ## Pull CK repositories
