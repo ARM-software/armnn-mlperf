@@ -7,6 +7,7 @@
     - [Pull CK repositories](#repos)
     - [Install TFLite](#tflite)
     - [Install ArmNN](#armnn)
+        - [with TFLite, Neon and OpenCL support](#armnn_tflite_neon_opencl) (**recommended**)
         - [with TFLite and Neon support](#armnn_tflite_neon)
         - [with TFLite and OpenCL support](#armnn_tflite_opencl)
         - [with TFLite and Reference support](#armnn_tflite_reference)
@@ -70,13 +71,13 @@ To install ArmNN with full support (frontends: TF, TFLite, ONNX; backends: Refer
 $ ck install package --tags=lib,armnn,tf,tflite,onnx,neon,opencl,rel.19.02
 ```
 
-If you would like to save time, you can only build with TFLite frontend support only using one the backend options below.
+If you would like to save time, you can only build with TFLite frontend support only using one of the backend options below.
 For more details, please refer to the [CK-ArmNN](http://github.com/ctuning/ck-armnn) repository.
 
-<a name="armnn_tflite_reference"></a>
-### Option 1: ArmNN with TFLite and Reference support
+<a name="armnn_tflite_neon_opencl"></a>
+### Option 1: Install ArmNN with TFLite, Neon and OpenCL support (**recommended**)
 ```
-$ ck install package --tags=lib,armnn,tflite,rel.19.02
+$ ck install package --tags=lib,armnn,tflite,neon,opencl,rel.19.02
 ```
 <a name="armnn_tflite_neon"></a>
 ### Option 2: Install ArmNN with TFLite and Neon support
@@ -88,10 +89,10 @@ $ ck install package --tags=lib,armnn,tflite,neon,rel.19.02
 ```
 $ ck install package --tags=lib,armnn,tflite,opencl,rel.19.02
 ```
-<a name="armnn_tflite_neon_opencl"></a>
-### Option 4: Install ArmNN with TFLite, Neon and OpenCL support
+<a name="armnn_tflite_reference"></a>
+### Option 4: ArmNN with TFLite and Reference support
 ```
-$ ck install package --tags=lib,armnn,tflite,neon,opencl,rel.19.02
+$ ck install package --tags=lib,armnn,tflite,rel.19.02
 ```
 
 <a name="image_classification"></a>
@@ -684,7 +685,7 @@ $ git checkout object-detection-armnn-tflite
 $ git branch
   master
 * object-detection-armnn-tflite
-$ ck find program:object-detection-armnn-tfliteA
+$ ck find program:object-detection-armnn-tflite
 /home/anton/CK_REPOS/ck-tensorflow/program/object-detection-armnn-tflite
 ```
 
@@ -718,5 +719,15 @@ $ CK_PYTHON=python3 ck benchmark program:object-detection-tflite \
 --repetitions=1 --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=5000 --env.CK_METRIC_TYPE=COCO \
 --record --record_repo=local --record_uoa=mlperf-object-detection-ssd-mobilenet-tflite-accuracy \
 --tags=mlperf,object-detection,ssd-mobilenet,tflite,accuracy \
+--skip_print_timers --skip_stat_analysis --process_multi_keys
+```
+
+<a name="ssd_mobilenet_armnn_opencl"></a>
+### ArmNN OpenCL data
+```bash
+$ CK_PYTHON=python3 ck benchmark program:object-detection-armnn-tflite --env.USE_OPENCL \
+--repetitions=1 --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=5000 --env.CK_METRIC_TYPE=COCO \
+--record --record_repo=local --record_uoa=mlperf-object-detection-ssd-mobilenet-armnn-tflite-accuracy-opencl \
+--tags=mlperf,object-detection,ssd-mobilenet,armnn-tflite,accuracy,opencl \
 --skip_print_timers --skip_stat_analysis --process_multi_keys
 ```
