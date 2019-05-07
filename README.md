@@ -39,8 +39,15 @@ Please follow the [CK installation instructions](https://github.com/ctuning/ck#i
 ```
 $ ck pull repo --url=https://github.com/arm-software/armnn-mlperf
 $ ck list repo:*armnn*
-armnn-mlperf
 ck-armnn
+armnn-mlperf
+$ ck list repo:*mlperf*
+ck-mlperf
+armnn-mlperf
+```
+**NB:** Remember to refresh all the repositories after any updates (e.g. bug fixes):
+```
+$ ck pull all
 ```
 
 <a name="tflite"></a>
