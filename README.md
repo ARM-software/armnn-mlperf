@@ -27,6 +27,7 @@
         - [ArmNN Reference data](#resnet_armnn_reference)
         - [Validate data](#resnet_validate)
 - [Object detection](#object_detection)
+    - [Caveats](#object_detection_caveats)
     - [Download the COCO 2017 validation dataset](#coco)
     - [SSD-MobileNet](#ssd_mobilenet)
         - [Model](#ssd_mobilenet_model)
@@ -671,9 +672,28 @@ mlperf-resnet-accuracy-500-velociti:experiment:mlperf-resnet-tflite-accuracy-500
 
 Please follow the MLPerf object detection instructions to install dependencies such as Python packages: first, the [common instructions](https://github.com/mlperf/inference/blob/master/edge/object_detection/ssd_mobilenet/README.md); then, the [TFLite instructions](https://github.com/mlperf/inference/blob/master/edge/object_detection/ssd_mobilenet/tflite/README.md).
 
-**NB** Object detection requires TFLite 1.13.1.
+<a name="object_detection_caveats"></a>
+## Caveats
 
-**NB:** The [COCO API](https://github.com/cocodataset/cocoapi) (used to evaluate object detection accuracy on the [COCO dataset](http://cocodataset.org/)) requires Python 3. Since many embedded platforms use Python 2 by default (including HiKey960), [care must be taken](https://github.com/dividiti/inference/blob/ssd_mobilenet/edge/object_detection/ssd_mobilenet/README.md#install-python-3-and-the-latest-pip) not to mix Python 3 and Python 2 packages. Therefore, all benchmarking commands below use the `CK_PYTHON=python3` prefix to ensure CK runs under Python 3.
+### Program
+
+Currently, `program:object-detection-armnn-tflite` lives on the [`object-detection-armnn-tflite`](https://github.com/ctuning/ck-tensorflow/tree/object-detection-armnn-tflite) branch of [CK-TensorFlow](https://github.com/ctuning/ck-tensorflow). Until it is merged to the [ArmNN-MLPerf](https://github.com/ARM-software/armnn-mlperf) repo, please switch to that branch when reproducing experiments e.g.:
+```
+$ cd `ck find repo:ck-tensorflow`
+$ git checkout object-detection-armnn-tflite
+$ git branch
+  master
+* object-detection-armnn-tflite
+$ ck find program:object-detection-armnn-tfliteA
+/home/anton/CK_REPOS/ck-tensorflow/program/object-detection-armnn-tflite
+```
+
+### TFLite
+SSD requires TFLite 1.13.1.
+
+### Python 3
+
+The [COCO API](https://github.com/cocodataset/cocoapi) (used to evaluate object detection accuracy on the [COCO dataset](http://cocodataset.org/)) requires Python 3. Since many embedded platforms use Python 2 by default (including HiKey960), [care must be taken](https://github.com/dividiti/inference/blob/ssd_mobilenet/edge/object_detection/ssd_mobilenet/README.md#install-python-3-and-the-latest-pip) not to mix Python 3 and Python 2 packages. Therefore, all benchmarking commands below use the `CK_PYTHON=python3` prefix to ensure CK runs under Python 3.
 
 <a name="coco"></a>
 ## Download the COCO 2017 validation dataset
@@ -684,17 +704,17 @@ $ ck install package:dataset-coco-2017-val
 <a name="ssd_mobilenet"></a>
 ## SSD-MobileNet
 
-<a name"ssd_mobilenet_model"></a>
+<a name="ssd_mobilenet_model"></a>
 ### Model
 Install the SSD-MobileNet model:
 ```bash
 $ ck install package --tags=model,tflite,mlperf,object-detection,ssd-mobilenet
 ```
 
-<a name"ssd_mobilenet_tflite"></a>
+<a name="ssd_mobilenet_tflite"></a>
 ### TFLite data (reference)
 ```bash
-$ ck benchmark program:object-detection-tflite \
+$ CK_PYTHON=python3 ck benchmark program:object-detection-tflite \
 --repetitions=1 --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=5000 --env.CK_METRIC_TYPE=COCO \
 --record --record_repo=local --record_uoa=mlperf-object-detection-ssd-mobilenet-tflite-accuracy \
 --tags=mlperf,object-detection,ssd-mobilenet,tflite,accuracy \
