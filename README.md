@@ -61,37 +61,42 @@ $ ck pull all
 ```
 $ ck install package --tags=lib,tflite,v1.13
 ```
-**NB:** For more details, please refer to the
-[TFLite installation instructions](https://github.com/mlperf/inference/blob/master/edge/object_classification/mobilenets/tflite/README.md#install-tensorflow-lite-tflite).
 
 <a name="armnn"></a>
 ## Install ArmNN
-
 To install ArmNN with full support (frontends: TF, TFLite, ONNX; backends: Reference, OpenCL, Neon):
 ```
 $ ck install package --tags=lib,armnn,tf,tflite,onnx,neon,opencl,rel.19.02
 ```
-**NB:** For more details, please refer to the [CK-ArmNN](http://github.com/ctuning/ck-armnn) repository.
 
-If you would like to save time, you can only build with TFLite support as below.
+If you would like to save time, you can only build with TFLite frontend support only using one the backend options below.
+For more details, please refer to the [CK-ArmNN](http://github.com/ctuning/ck-armnn) repository.
+
 <a name="armnn_tflite_reference"></a>
-### Install ArmNN with TFLite and Reference support
+### Option 1: ArmNN with TFLite and Reference support
 ```
 $ ck install package --tags=lib,armnn,tflite,rel.19.02
 ```
 <a name="armnn_tflite_neon"></a>
-### Install ArmNN with TFLite and Neon support
+### Option 2: Install ArmNN with TFLite and Neon support
 ```
 $ ck install package --tags=lib,armnn,tflite,neon,rel.19.02
 ```
 <a name="armnn_tflite_opencl"></a>
-### Install ArmNN with TFLite and OpenCL support
+### Option 3: Install ArmNN with TFLite and OpenCL support
 ```
 $ ck install package --tags=lib,armnn,tflite,opencl,rel.19.02
+```
+<a name="armnn_tflite_neon_opencl"></a>
+### Option 4: Install ArmNN with TFLite, Neon and OpenCL support
+```
+$ ck install package --tags=lib,armnn,tflite,neon,opencl,rel.19.02
 ```
 
 <a name="image_classification"></a>
 # Image classification
+
+Please follow the MLPerf image classification instructions to install dependencies such as Python packages: first, the [common instructions](https://github.com/mlperf/inference/blob/master/edge/object_classification/mobilenets/README.md); then, the [TFLite instructions](https://github.com/mlperf/inference/blob/master/edge/object_classification/mobilenets/tflite/README.md).
 
 <a name="imagenet"></a>
 ## Download the ImageNet 2012 validation dataset
@@ -664,6 +669,12 @@ mlperf-resnet-accuracy-500-velociti:experiment:mlperf-resnet-tflite-accuracy-500
 <a name="object_detection"></a>
 # Object detection
 
+Please follow the MLPerf object detection instructions to install dependencies such as Python packages: first, the [common instructions](https://github.com/mlperf/inference/blob/master/edge/object_detection/ssd_mobilenet/README.md); then, the [TFLite instructions](https://github.com/mlperf/inference/blob/master/edge/object_detection/ssd_mobilenet/tflite/README.md).
+
+**NB** Object detection requires TFLite 1.13.1.
+
+**NB:** The [COCO API](https://github.com/cocodataset/cocoapi) (used to evaluate object detection accuracy on the [COCO dataset](http://cocodataset.org/)) requires Python 3. Since many embedded platforms use Python 2 by default (including HiKey960), [care must be taken](https://github.com/dividiti/inference/blob/ssd_mobilenet/edge/object_detection/ssd_mobilenet/README.md#install-python-3-and-the-latest-pip) not to mix Python 3 and Python 2 packages. Therefore, all benchmarking commands below use the `CK_PYTHON=python3` prefix to ensure CK runs under Python 3.
+
 <a name="coco"></a>
 ## Download the COCO 2017 validation dataset
 ```bash
@@ -673,13 +684,19 @@ $ ck install package:dataset-coco-2017-val
 <a name="ssd_mobilenet"></a>
 ## SSD-MobileNet
 
-<a name"ssd_mobilenet_model"><a/>
+<a name"ssd_mobilenet_model"></a>
 ### Model
 Install the SSD-MobileNet model:
-```
+```bash
 $ ck install package --tags=model,tflite,mlperf,object-detection,ssd-mobilenet
 ```
 
-<a name"ssd_mobilenet_tflite"><a/>
+<a name"ssd_mobilenet_tflite"></a>
 ### TFLite data (reference)
-
+```bash
+$ ck benchmark program:object-detection-tflite \
+--repetitions=1 --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=5000 --env.CK_METRIC_TYPE=COCO \
+--record --record_repo=local --record_uoa=mlperf-object-detection-ssd-mobilenet-tflite-accuracy \
+--tags=mlperf,object-detection,ssd-mobilenet,tflite,accuracy \
+--skip_print_timers --skip_stat_analysis --process_multi_keys
+```
