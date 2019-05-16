@@ -734,7 +734,7 @@ $ CK_PYTHON=python3 ck benchmark program:object-detection-tflite \
 <a name="ssd_mobilenet_armnn_neon"></a>
 ### ArmNN Neon data
 ```bash
-$ CK_PYTHON=python3 ck benchmark program:object-detection-armnn-tflite --env.USE_NEON \
+$ CK_PYTHON=python3 ck benchmark program:object-detection-armnn-tflite --env.USE_NMS=regular --env.USE_NEON \
 --repetitions=1 --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=5000 --env.CK_METRIC_TYPE=COCO \
 --record --record_repo=local --record_uoa=mlperf-object-detection-ssd-mobilenet-armnn-tflite-accuracy-neon \
 --tags=mlperf,object-detection,ssd-mobilenet,armnn-tflite,accuracy,neon \
@@ -744,7 +744,7 @@ $ CK_PYTHON=python3 ck benchmark program:object-detection-armnn-tflite --env.USE
 <a name="ssd_mobilenet_armnn_opencl"></a>
 ### ArmNN OpenCL data
 ```bash
-$ CK_PYTHON=python3 ck benchmark program:object-detection-armnn-tflite --env.USE_OPENCL \
+$ CK_PYTHON=python3 ck benchmark program:object-detection-armnn-tflite --env.USE_NMS=regular --env.USE_OPENCL \
 --repetitions=1 --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=5000 --env.CK_METRIC_TYPE=COCO \
 --record --record_repo=local --record_uoa=mlperf-object-detection-ssd-mobilenet-armnn-tflite-accuracy-opencl \
 --tags=mlperf,object-detection,ssd-mobilenet,armnn-tflite,accuracy,opencl \
@@ -767,3 +767,34 @@ hikey$ ck zip local:experiment:mlperf-object-detection-ssd-mobilenet*accuracy* \
 ```
 The archives were then uploaded to DropBox.
 You can follow instructions below to download the archives and validate the accuracy.
+
+#### hikey
+```
+$ wget https://www.dropbox.com/s/jzpum9fedwgq8rd/mlperf-object-detection-ssd-mobilenet-accuracy-hikey.zip
+$ ck add repo --zip=mlperf-object-detection-ssd-mobilenet-accuracy-hikey.zip
+$ ck list --repo_uoa=mlperf-object-detection-ssd-mobilenet-accuracy-hikey --print_full
+mlperf-object-detection-ssd-mobilenet-accuracy-hikey:experiment:mlperf-object-detection-ssd-mobilenet-armnn-tflite-accuracy-opencl
+mlperf-object-detection-ssd-mobilenet-accuracy-hikey:experiment:mlperf-object-detection-ssd-mobilenet-armnn-tflite-accuracy-neon
+mlperf-object-detection-ssd-mobilenet-accuracy-hikey:experiment:mlperf-object-detection-ssd-mobilenet-tflite-accuracy
+```
+
+##### TFLite vs. ArmNN Neon
+```
+$ ck compare_experiments mlperf \
+mlperf-object-detection-ssd-mobilenet-accuracy-hikey:experiment:mlperf-object-detection-ssd-mobilenet-tflite-accuracy \
+mlperf-object-detection-ssd-mobilenet-accuracy-hikey:experiment:mlperf-object-detection-ssd-mobilenet-armnn-tflite-accuracy-neon
+```
+
+##### TFLite vs. ArmNN OpenCL
+```
+$ ck compare_experiments mlperf \
+mlperf-object-detection-ssd-mobilenet-accuracy-hikey:experiment:mlperf-object-detection-ssd-mobilenet-tflite-accuracy \
+mlperf-object-detection-ssd-mobilenet-accuracy-hikey:experiment:mlperf-object-detection-ssd-mobilenet-armnn-tflite-accuracy-opencl
+```
+
+##### ArmNN Neon vs. ArmNN OpenCL
+```
+$ ck compare_experiments mlperf \
+mlperf-object-detection-ssd-mobilenet-accuracy-hikey:experiment:mlperf-object-detection-ssd-mobilenet-armnn-tflite-accuracy-neon \
+mlperf-object-detection-ssd-mobilenet-accuracy-hikey:experiment:mlperf-object-detection-ssd-mobilenet-armnn-tflite-accuracy-opencl
+```
