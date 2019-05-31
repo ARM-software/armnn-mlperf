@@ -12,7 +12,7 @@
         - [with TFLite and OpenCL support](#gs_armnn_tflite_opencl)
         - [with TFLite and Reference support](#gs_armnn_tflite_reference)
 - [Image classification](#image_classification)
-    - [Download the ImageNet 2012 validation dataset](#imagenet)
+    - [Download and preprocess the ImageNet 2012 validation dataset](#imagenet)
     - [MobileNet](#mobilenet)
         - [Model](#mobilenet_model)
         - [TFLite data](#mobilenet_tflite) (reference)
@@ -29,7 +29,7 @@
         - [Validate data](#resnet_validate)
 - [Object detection](#object_detection)
     - [Caveats](#object_detection_caveats)
-    - [Download the COCO 2017 validation dataset](#coco)
+    - [Download and preprocess the COCO 2017 validation dataset](#coco)
     - [SSD-MobileNet](#ssd_mobilenet)
         - [Model](#ssd_mobilenet_model)
         - [TFLite data](#ssd_mobilenet_tflite) (reference)
@@ -110,16 +110,18 @@ $ ck install package --tags=lib,armnn,tflite,rel.19.02
 Please follow the MLPerf image classification instructions to install dependencies such as Python packages: first, the [common instructions](https://github.com/mlperf/inference/blob/master/edge/object_classification/mobilenets/README.md); then, the [TFLite instructions](https://github.com/mlperf/inference/blob/master/edge/object_classification/mobilenets/tflite/README.md).
 
 <a name="imagenet"></a>
-## Download the ImageNet 2012 validation dataset
+## Download and preprocess the ImageNet 2012 validation dataset
 
 ### Full (50,000 images)
 ```
-$ ck install package:imagenet-2012-val
+$ ck install package --tags=dataset,imagenet,val,original,full
+$ ck install package --tags=dataset,imagenet,val,preprocessed,full
 ```
 
 ### Minimal (500 images)
 ```
-$ ck install package:imagenet-2012-val-min
+$ ck install package --tags=dataset,imagenet,val,original,min --no_tags=resized
+$ ck install package --tags=dataset,imagenet,val,preprocessed
 ```
 
 <a name="mobilenet"></a>
@@ -152,19 +154,6 @@ $ ck benchmark program:image-classification-tflite \
 --record --record_repo=local --record_uoa=mlperf-mobilenet-tflite-accuracy-50000 \
 --tags=image-classification,mlperf,mobilenet,tflite,accuracy,50000 \
 --skip_print_timers --skip_stat_analysis --process_multi_keys
-```
-
-**NB:** On the first run, the dataset will be preprocessed and cached in the
-`preprocessed/` subdirectory under the program's directory:
-```
-$ du -hs -L `ck find program:image-classification-tflite`/preprocessed
-7.1G
-```
-
-You may want to create a symbolic link to this directory for the corresponding ArmNN program e.g.:
-```
-$ ln -s `ck find program:image-classification-tflite`/preprocessed \
-        `ck find program:image-classification-armnn-tflite`/preprocessed
 ```
 
 <a name="mobilenet_armnn_neon"></a>
