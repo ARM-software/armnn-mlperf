@@ -66,10 +66,6 @@ RUN ck detect soft:compiler.gcc --full_path=`which ${CK_CC}`
 RUN ck install package --tags=lib,protobuf-host,v3.5
 RUN ck install package --tags=lib,boost,for-armnn-static,v1.64
 RUN ck install package --tags=lib,armnn,tflite,rel.19.05
-# A temporary workaround for https://github.com/ARM-software/armnn/issues/196
-RUN cp \
-    `ck locate env --tags=lib,armnn,tflite,rel.19.05`/obj/*.so \
-    `ck locate env --tags=lib,armnn,tflite,rel.19.05`/install/lib/
 
 # NB: Install TFLite after ArmNN to prevent TF source detection.
 RUN ck install package --tags=lib,tensorflow-lite,tensorflow-static,v1.13.1
