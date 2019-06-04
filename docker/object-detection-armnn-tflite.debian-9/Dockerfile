@@ -71,6 +71,15 @@ RUN ck install package --tags=tool,coco,api
 # Install TensorFlow Object Detection API.
 RUN ck install package --tags=tensorflow,model,api
 
+# Install C/C++ dependencies.
+RUN ck install package --tags=lib,tensorflow-lite,tensorflow-static,v1.13.1
+
+RUN ck pull repo --url=https://github.com/arm-software/armnn-mlperf
+RUN ck install package --tags=tensorflow,source
+RUN ck install package --tags=lib,protobuf-host,v3.5
+RUN ck install package --tags=lib,boost,for-armnn-static,v1.64
+RUN ck install package --tags=lib,armnn,tflite,rel.19.05
+
 # Download the SSD-MobileNet TF/TFLite models (non-quantized and quantized).
 # https://github.com/mlperf/inference/blob/master/edge/object_detection/ssd_mobilenet/tflite/README.md#install-the-ssd-mobilenet-models-for-tflite
 RUN ck install package --tags=model,tflite,object-detection,mlperf,ssd-mobilenet,non-quantized
@@ -86,14 +95,6 @@ RUN echo | ck install package --tags=object-detection,dataset,coco.2017,val,orig
  rm $CK_ENV_DATASET_IMAGE_DIR/*;\
  mv $CK_ENV_DATASET_COCO/000000000139.jpg $CK_ENV_DATASET_IMAGE_DIR/;\
  rm $CK_ENV_DATASET_COCO_LABELS_DIR/*train2017.json'
-
-# Install C/C++ dependencies.
-RUN ck pull repo --url=https://github.com/arm-software/armnn-mlperf
-RUN ck install package --tags=lib,protobuf-host,v3.5
-RUN ck install package --tags=lib,boost,for-armnn-static,v1.64
-RUN ck install package --tags=lib,armnn,tflite,rel.19.05
-# NB: Install TFLite after ArmNN to prevent TF source detection.
-RUN ck install package --tags=lib,tensorflow-lite,tensorflow-static,v1.13.1
 
 # Compile the Object Detection ArmNN-TFLite program.
 RUN ck compile program:object-detection-armnn-tflite
