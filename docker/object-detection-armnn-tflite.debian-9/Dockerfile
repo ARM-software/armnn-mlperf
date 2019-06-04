@@ -45,8 +45,8 @@ RUN cd ${CK_ROOT} \
  && ${CK_PYTHON} setup.py install --user \
  && ${CK_PYTHON} -c "import ck.kernel as ck; print ('Collective Knowledge v%s' % ck.__version__)"
 
-# Pull CK repositories (including ck-mlperf, ck-env, ck-autotuning and ck-tensorflow).
-RUN ck pull repo --url=https://github.com/arm-software/armnn-mlperf
+# Pull CK repositories (including ck-env, ck-autotuning and ck-tensorflow).
+RUN ck pull repo:ck-mlperf
 
 # Use generic Linux settings with dummy frequency setting scripts.
 RUN ck detect platform.os --platform_init_uoa=generic-linux-dummy
@@ -88,6 +88,7 @@ RUN echo | ck install package --tags=object-detection,dataset,coco.2017,val,orig
  rm $CK_ENV_DATASET_COCO_LABELS_DIR/*train2017.json'
 
 # Install C/C++ dependencies.
+RUN ck pull repo --url=https://github.com/arm-software/armnn-mlperf
 RUN ck install package --tags=lib,protobuf-host,v3.5
 RUN ck install package --tags=lib,boost,for-armnn-static,v1.64
 RUN ck install package --tags=lib,armnn,tflite,rel.19.05
