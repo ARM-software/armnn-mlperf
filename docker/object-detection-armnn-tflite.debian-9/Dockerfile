@@ -71,20 +71,23 @@ RUN ck install package --tags=tool,coco,api
 # Install TensorFlow Object Detection API.
 RUN ck install package --tags=tensorflow,model,api
 
-# Install C/C++ dependencies.
+# Install TFLite.
 RUN ck install package --tags=lib,tensorflow-lite,tensorflow-static,v1.13.1
-
-RUN ck pull repo --url=https://github.com/arm-software/armnn-mlperf
-RUN ck install package --tags=tensorflow,source
-RUN ck install package --tags=lib,protobuf-host,v3.5
-RUN ck install package --tags=lib,flatbuffers
-RUN ck install package --tags=lib,boost,for-armnn-static,v1.64\
- && ck virtual env --tags=lib,boost,for-armnn-static,v1.64 --shell_cmd='rm -rf $CK_ENV_LIB_BOOST/../boost_1_64_0'
-RUN ck install package --tags=lib,armnn,tflite,rel.19.05
 
 # Download the SSD-MobileNet TF/TFLite models (non-quantized and quantized).
 # https://github.com/mlperf/inference/blob/master/edge/object_detection/ssd_mobilenet/tflite/README.md#install-the-ssd-mobilenet-models-for-tflite
 RUN ck install package --tags=model,tflite,object-detection,mlperf,ssd-mobilenet,non-quantized
+
+# Install C/C++ dependencies of ArmNN.
+RUN ck pull repo --url=https://github.com/arm-software/armnn-mlperf
+RUN ck install package --tags=lib,protobuf-host,v3.5
+RUN ck install package --tags=lib,flatbuffers
+RUN ck install package --tags=lib,boost,for-armnn-static,v1.64\
+ && ck virtual env --tags=lib,boost,for-armnn-static,v1.64 --shell_cmd='rm -rf $CK_ENV_LIB_BOOST/../boost_1_64_0'
+# Reduce the image size by detecting the TF source in the installed TFLite package rather than installing the TF source package with '--tags=tensorflow,source'.
+#RUN echo "1.13.1" | ck detect soft:lib.tensorflow.source --full_path=/home/dvdt/CK_TOOLS/lib-tflite-src-static-1.13.1-gcc-6.3.0-linux-64/src/tensorflow/tensorflow.bzl
+RUN echo "1.13.1" | ck detect soft:lib.tensorflow.source --full_path=`ck locate env --tags=lib,tflite,v1.13.1`/src/tensorflow/tensorflow.bzl
+RUN ck install package --tags=lib,armnn,tflite,rel.19.05
 
 # Download the COCO 2017 validation dataset (5,000 images) to the default path;
 # preprocess only the first 50 images (as CPU Reference is too slow for full evaluation);
