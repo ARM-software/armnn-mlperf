@@ -760,6 +760,17 @@ mlperf-object-detection-ssd-mobilenet-accuracy-hikey:experiment:mlperf-object-de
 $ ck compare_experiments mlperf \
 mlperf-object-detection-ssd-mobilenet-accuracy-hikey:experiment:mlperf-object-detection-ssd-mobilenet-tflite-accuracy \
 mlperf-object-detection-ssd-mobilenet-accuracy-hikey:experiment:mlperf-object-detection-ssd-mobilenet-armnn-tflite-accuracy-neon
+...
+{'delta_mAP': 0.0007913466136450775,
+ 'delta_recall': 0.001550580396864898,
+ 'epsilon_bbox': [1.0, 1.0, 1.0, 1.0],
+ 'epsilon_score': 1e-05,
+ 'max_delta_bbox': [596.98, 490.93, 606.36, 583.04],
+ 'max_delta_score': 0.49000000000000005,
+ 'num_mismatched_classes': 239,
+ 'num_mismatched_files': 1166,
+ 'num_mismatched_probabilities': 442,
+ 'return': 0}
 ```
 
 ##### TFLite vs. ArmNN OpenCL
@@ -767,6 +778,17 @@ mlperf-object-detection-ssd-mobilenet-accuracy-hikey:experiment:mlperf-object-de
 $ ck compare_experiments mlperf \
 mlperf-object-detection-ssd-mobilenet-accuracy-hikey:experiment:mlperf-object-detection-ssd-mobilenet-tflite-accuracy \
 mlperf-object-detection-ssd-mobilenet-accuracy-hikey:experiment:mlperf-object-detection-ssd-mobilenet-armnn-tflite-accuracy-opencl
+...
+{'delta_mAP': 0.0007900779499596944,
+ 'delta_recall': 0.0015451924658304583,
+ 'epsilon_bbox': [1.0, 1.0, 1.0, 1.0],
+ 'epsilon_score': 1e-05,
+ 'max_delta_bbox': [596.98, 490.93, 606.36, 583.04],
+ 'max_delta_score': 0.49000000000000005,
+ 'num_mismatched_classes': 239,
+ 'num_mismatched_files': 1167,
+ 'num_mismatched_probabilities': 444,
+ 'return': 0}
 ```
 
 ##### ArmNN Neon vs. ArmNN OpenCL
@@ -774,4 +796,18 @@ mlperf-object-detection-ssd-mobilenet-accuracy-hikey:experiment:mlperf-object-de
 $ ck compare_experiments mlperf \
 mlperf-object-detection-ssd-mobilenet-accuracy-hikey:experiment:mlperf-object-detection-ssd-mobilenet-armnn-tflite-accuracy-neon \
 mlperf-object-detection-ssd-mobilenet-accuracy-hikey:experiment:mlperf-object-detection-ssd-mobilenet-armnn-tflite-accuracy-opencl
+...
+{'delta_mAP': -1.2686636853831423e-06,
+ 'delta_recall': -5.387931034439575e-06,
+ 'epsilon_bbox': [1.0, 1.0, 1.0, 1.0],
+ 'epsilon_score': 1e-05,
+ 'max_delta_bbox': [0.010000000000047748,
+                    0.010000000000047748,
+                    0.010000000000047748,
+                    0.010000000000047748],
+ 'max_delta_score': 0.0010000000000000009,
+ 'num_mismatched_classes': 0,
+ 'num_mismatched_files': 7,
+ 'num_mismatched_probabilities': 7,
+ 'return': 0}
 ```
