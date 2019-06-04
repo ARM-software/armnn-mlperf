@@ -77,7 +77,9 @@ RUN ck install package --tags=lib,tensorflow-lite,tensorflow-static,v1.13.1
 RUN ck pull repo --url=https://github.com/arm-software/armnn-mlperf
 RUN ck install package --tags=tensorflow,source
 RUN ck install package --tags=lib,protobuf-host,v3.5
-RUN ck install package --tags=lib,boost,for-armnn-static,v1.64
+RUN ck install package --tags=lib,flatbuffers
+RUN ck install package --tags=lib,boost,for-armnn-static,v1.64\
+ && ck virtual env --tags=lib,boost,for-armnn-static,v1.64 --shell_cmd='rm -rf $CK_ENV_LIB_BOOST/../boost_1_64_0'
 RUN ck install package --tags=lib,armnn,tflite,rel.19.05
 
 # Download the SSD-MobileNet TF/TFLite models (non-quantized and quantized).
@@ -88,8 +90,8 @@ RUN ck install package --tags=model,tflite,object-detection,mlperf,ssd-mobilenet
 # preprocess only the first 50 images (as CPU Reference is too slow for full evaluation);
 # remove the original images and training annotations while taking care to preserve
 # 'val2017/000000000139.jpg' used to detect COCO 2017 (ck-env:soft:dataset.coco.2017.val).
-RUN echo | ck install package --tags=object-detection,dataset,coco.2017,val,original,full \
- && ck install package --tags=object-detection,dataset,coco.2017,preprocessed,first.50 \
+RUN echo | ck install package --tags=object-detection,dataset,coco.2017,val,original,full\
+ && ck install package --tags=object-detection,dataset,coco.2017,preprocessed,first.50\
  && ck virtual env --tags=object-detection,dataset,coco.2017,val,original,full --shell_cmd=\
 'mv $CK_ENV_DATASET_IMAGE_DIR/000000000139.jpg $CK_ENV_DATASET_COCO/;\
  rm $CK_ENV_DATASET_IMAGE_DIR/*;\
