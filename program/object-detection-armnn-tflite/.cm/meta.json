@@ -189,13 +189,6 @@
       "sort": 100, 
       "tags": "lib,xopenme"
     }, 
-    "tensorflowmodel-api": {
-      "force_target_as_host": "yes", 
-      "local": "yes", 
-      "name": "Tensorflow model API", 
-      "sort": 80, 
-      "tags": "tensorflowmodel,api"
-    }, 
     "tool-coco": {
       "force_target_as_host": "yes", 
       "local": "yes", 
@@ -208,7 +201,7 @@
       "local": "yes", 
       "name": "TensorFlow model", 
       "sort": 60, 
-      "tags": "model,tflite,model,object-detection,ssd"
+      "tags": "model,tflite,object-detection,ssd"
     }
   }, 
   "run_vars": {

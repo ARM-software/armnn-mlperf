@@ -11,7 +11,7 @@ ENTRYPOINT ["/bin/bash", "-c"]
 # Install known system dependencies and immediately clean up to make the image smaller.
 # CK needs: git, wget, zip.
 # TF needs: curl.
-# ArmNN needs: cmake. (TensorFlow Object Detection API needs ProtoBuf 3.0 which also needs CMake.)
+# ArmNN needs: cmake.
 RUN apt update -y\
  && apt install -y apt-utils\
  && apt upgrade -y\
@@ -68,8 +68,6 @@ RUN ck install package --tags=lib,python-package,cython
 RUN ck show env --tags=python-package
 # Install Python COCO API.
 RUN ck install package --tags=tool,coco,api
-# Install TensorFlow Object Detection API.
-RUN ck install package --tags=tensorflow,model,api
 
 # Install TFLite.
 RUN ck install package --tags=lib,tensorflow-lite,tensorflow-static,v1.13.1
