@@ -12,17 +12,16 @@ ENTRYPOINT ["/bin/bash", "-c"]
 # CK needs: git, wget, zip.
 # TF needs: curl.
 # ArmNN needs: cmake.
-RUN apt update -y \
- && apt install -y apt-utils \
- && apt upgrade -y \
- && apt install -y \
-        git wget zip libz-dev curl vim \
-        cmake \
-        python3 python3-pip \
+RUN apt update -y\
+ && apt install -y apt-utils\
+ && apt upgrade -y\
+ && apt install -y\
+ git wget zip libz-dev\
+ curl\
+ cmake\
+ python3 python3-pip\
+ vim\
  && apt clean
-
-# Upgrade pip.
-RUN python3 -m pip install --upgrade pip
 
 # Create non-root user.
 RUN useradd --create-home --user-group --shell /bin/bash dvdt
@@ -46,34 +45,25 @@ RUN cd ${CK_ROOT} \
  && ${CK_PYTHON} setup.py install --user \
  && ${CK_PYTHON} -c "import ck.kernel as ck; print ('Collective Knowledge v%s' % ck.__version__)"
 
-# Pull CK repositories (including ck-env, ck-mlperf, ck-autotuning and ck-tensorflow).
-RUN ck pull repo --url=https://github.com/arm-software/armnn-mlperf
+# Pull CK repositories (including ck-env, ck-autotuning and ck-tensorflow).
+RUN ck pull repo:ck-mlperf
 
 # Use generic Linux settings with dummy frequency setting scripts.
 RUN ck detect platform.os --platform_init_uoa=generic-linux-dummy
 
-# Install Python dependencies.
-RUN ${CK_PYTHON} -m pip install --ignore-installed pip setuptools --user
-RUN ck detect soft:compiler.python --full_path=`which ${CK_PYTHON}`
+# Detect C/C++ compiler (gcc).
+RUN ck detect soft:compiler.gcc --full_path=`which ${CK_CC}`
+# Install TFLite.
+RUN ck install package --tags=lib,tensorflow-lite,tensorflow-static,v1.13.1
 
+# Detect Python.
+RUN ck detect soft:compiler.python --full_path=`which ${CK_PYTHON}`
+# Install the latest Python package installer (pip).
+RUN ${CK_PYTHON} -m pip install --ignore-installed pip setuptools --user
+# Install Python dependencies.
 RUN ck install package --tags=lib,python-package,numpy
 RUN ck install package --tags=lib,python-package,scipy --force_version=1.2.1
 RUN ck install package --tags=lib,python-package,pillow
-
-# Install C/C++ dependencies.
-RUN ck detect soft:compiler.gcc --full_path=`which ${CK_CC}`
-
-RUN ck install package --tags=lib,protobuf-host,v3.5
-RUN ck install package --tags=lib,boost,for-armnn,static,v1.64
-RUN ck install package --tags=lib,armnn,tflite,rel.19.05
-
-# NB: Install TFLite after ArmNN to prevent TF source detection.
-RUN ck install package --tags=lib,tensorflow-lite,tensorflow-static,v1.13.1
-
-# Download and preprocess the first 500 images of the ImageNet 2012 validation dataset.
-RUN ck install package --tags=dataset,imagenet,aux
-RUN ck install package --tags=dataset,imagenet,val,original,min --no_tags=resized
-RUN ck install package --tags=dataset,imagenet,val,preprocessed
 
 # Download the MobileNet TF/TFLite models (non-quantized and quantized).
 # https://github.com/mlperf/inference/blob/master/edge/object_classification/mobilenets/tflite/README.md#install-the-mobilenet-models-for-tflite
@@ -84,11 +74,28 @@ RUN ck install package --tags=image-classification,model,tf,tflite,mlperf,mobile
 RUN ck install package --tags=image-classification,model,tflite,mlperf,resnet,downloaded,with-argmax
 RUN ck install package --tags=image-classification,model,tflite,mlperf,resnet,downloaded,no-argmax
 
+# Install C/C++ dependencies of ArmNN.
+RUN ck pull repo --url=https://github.com/arm-software/armnn-mlperf
+RUN ck install package --tags=lib,protobuf-host,v3.5
+RUN ck install package --tags=lib,flatbuffers
+RUN ck install package --tags=lib,boost,for-armnn,static,v1.64\
+ && ck virtual env --tags=lib,boost,for-armnn,static,v1.64 --shell_cmd='rm -rf $CK_ENV_LIB_BOOST/../boost_1_64_0'
+# Reduce the image size by detecting the TF source in the installed TFLite package rather than installing the TF source package with '--tags=tensorflow,source'.
+RUN echo "1.13.1" | ck detect soft:lib.tensorflow.source --full_path=`ck locate env --tags=lib,tflite,v1.13.1`/src/tensorflow/tensorflow.bzl
+RUN ck install package --tags=lib,armnn,tflite,rel.19.05
+
+# Download and preprocess the first 500 images of the ImageNet 2012 validation dataset.
+RUN ck install package --tags=dataset,imagenet,aux
+RUN ck install package --tags=dataset,imagenet,val,original,min --no_tags=resized
+RUN ck install package --tags=dataset,imagenet,val,preprocessed
+
 # Compile the Image Classification ArmNN-TFLite program.
 RUN ck compile armnn-mlperf:program:image-classification-armnn-tflite
 
 # Compile the Image Classification TFLite program.
 RUN ck compile ck-tensorflow:program:image-classification-tflite
 
-# Run the Image Classification Armnn-TFLite program once with the non-quantized MobileNet model.
-CMD ["ck run armnn-mlperf:program:image-classification-armnn-tflite --dep_add_tags.weights=mobilenet,non-quantized"]
+# Run the Image Classification ArmNN-TFLite program
+# with the non-quantized MobileNet model once.
+CMD ["ck run armnn-mlperf:program:image-classification-armnn-tflite \
+--dep_add_tags.weights=mobilenet,non-quantized"]
