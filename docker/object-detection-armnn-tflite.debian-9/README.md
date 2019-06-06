@@ -39,7 +39,7 @@ $ ck run docker:object-detection-armnn-tflite.debian-9
 $ docker run --rm ctuning/object-detection-armnn-tflite.debian-9 \
     "ck run program:object-detection-armnn-tflite \
         --dep_add_tags.weights=ssd-mobilenet,non-quantized --env.USE_NMS=regular \
-        --dep_add_tags.dataset=coco.2017,full --env.CK_BATCH_COUNT=50 \
+        --dep_add_tags.dataset=coco.2017,first.50 --env.CK_BATCH_COUNT=50 \
     "
 ...
 
