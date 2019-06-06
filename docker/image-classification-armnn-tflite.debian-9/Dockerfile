@@ -64,7 +64,7 @@ RUN ck install package --tags=lib,python-package,pillow
 RUN ck detect soft:compiler.gcc --full_path=`which ${CK_CC}`
 
 RUN ck install package --tags=lib,protobuf-host,v3.5
-RUN ck install package --tags=lib,boost,for-armnn-static,v1.64
+RUN ck install package --tags=lib,boost,for-armnn,static,v1.64
 RUN ck install package --tags=lib,armnn,tflite,rel.19.05
 
 # NB: Install TFLite after ArmNN to prevent TF source detection.

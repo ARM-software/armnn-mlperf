@@ -11,7 +11,7 @@
       "local": "yes",
       "name": "ArmNN library (with TFLite support)",
       "sort": 40,
-      "tags": "lib,armnn,tflite",
+      "tags": "lib,armnn,tflite,rel.19.05",
       "update_tags_if_env": {
         "neon": [
           {
@@ -54,7 +54,7 @@
   "compiler_env": "CK_CXX",
   "compiler_flags_as_env": "$<<CK_COMPILER_FLAG_CPP14>>$ -Wall -Wno-sign-compare",
   "data_name": "image-classification-armnn-tflite",
-  "extra_ld_vars": "$<<CK_ENV_LIB_TF_LIBS_DIRS>>$ $<<CK_ENV_LIB_TF_LIBS>>$ -L$<<CK_ENV_LIB_ARMNN_LIB>>$ -larmnn -lpthread -larmnnTfLiteParser",
+  "extra_ld_vars": "$<<CK_ENV_LIB_TF_LIBS_DIRS>>$ $<<CK_ENV_LIB_TF_LIBS>>$ -L$<<CK_ENV_LIB_ARMNN_LIB>>$ -larmnn -pthread -larmnnTfLiteParser",
   "linker_add_lib_as_env": [
     "CK_CXX_EXTRA",
     "CK_ENV_LIB_STDCPP_STATIC"
