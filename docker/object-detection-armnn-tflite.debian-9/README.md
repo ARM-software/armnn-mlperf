@@ -48,13 +48,12 @@ $ docker run --rm ctuning/object-detection-armnn-tflite.debian-9 \
         --dep_add_tags.dataset=coco.2017,first.50 --env.CK_BATCH_COUNT=50 \
     "
 ...
-
 Summary:
 -------------------------------
-Graph loaded in 0.000000s
-All images loaded in 0.000000s
-All images detected in 0.000000s
-Average detection time: 0.000000s
+All images loaded in 0.138678s
+Average image load time: 0.002774s
+All images detected in 1283.481567s
+Average detection time: 25.633888s
 mAP: 0.2973506730812673
 Recall: 0.3064842506013031
 --------------------------------
@@ -73,10 +72,10 @@ $ docker run --rm ctuning/object-detection-armnn-tflite.debian-9 \
 ...
 Summary:
 -------------------------------
-Graph loaded in 0.000000s
-All images loaded in 0.000000s
-All images detected in 0.000000s
-Average detection time: 0.000000s
+All images loaded in 0.136716s
+Average image load time: 0.002734s
+All images detected in 1231.462524s
+Average detection time: 24.573481s
 mAP: 0.29687329696309245
 Recall: 0.30644766969653536
 --------------------------------
