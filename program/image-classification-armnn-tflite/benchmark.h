@@ -108,19 +108,24 @@ private:
 
 class BenchmarkSettings {
 public:
-  const std::string graph_file = getenv_s("RUN_OPT_GRAPH_FILE");
-  const std::string images_dir = getenv_s("RUN_OPT_IMAGE_DIR");
-  const std::string images_file = getenv_s("RUN_OPT_IMAGE_LIST");
-  const std::string result_dir = getenv_s("RUN_OPT_RESULT_DIR");
-  const std::string data_layout = getenv_s("RUN_OPT_DATA_LAYOUT");
-  const int batch_count = getenv_i("RUN_OPT_BATCH_COUNT");
-  const int batch_size = getenv_i("RUN_OPT_BATCH_SIZE");
-  const int image_size = getenv_i("RUN_OPT_IMAGE_SIZE");
+
+  const std::string images_dir = getenv_s("CK_ENV_DATASET_IMAGENET_PREPROCESSED_DIR");
+  const std::string images_file = getenv_s("CK_ENV_DATASET_IMAGENET_PREPROCESSED_SUBSET_FOF");
+  const std::string result_dir = getenv_s("CK_RESULTS_DIR");
+  const std::string input_layer_name = getenv_s("CK_ENV_TENSORFLOW_MODEL_INPUT_LAYER_NAME");
+  const std::string output_layer_name = getenv_s("CK_ENV_TENSORFLOW_MODEL_OUTPUT_LAYER_NAME");
+  const int batch_count = getenv_i("CK_BATCH_COUNT");
+  const int batch_size = getenv_i("CK_BATCH_SIZE");
+  const int image_size = getenv_i("CK_ENV_DATASET_IMAGENET_PREPROCESSED_INPUT_SQUARE_SIDE");
   const int num_channels = 3;
   const int num_classes = 1000;
-  const bool normalize_img = getenv_i("RUN_OPT_NORMALIZE_DATA") != 0;
-  const bool subtract_mean = getenv_i("RUN_OPT_SUBTRACT_MEAN") != 0;
-  const bool full_report = getenv_i("RUN_OPT_SILENT_MODE") == 0;
+  const bool normalize_img = getenv_s("CK_ENV_TENSORFLOW_MODEL_NORMALIZE_DATA") == "YES";
+  const bool subtract_mean = getenv_s("CK_ENV_TENSORFLOW_MODEL_SUBTRACT_MEAN") == "YES";
+  const bool full_report = getenv_i("CK_SILENT_MODE") == 0;
+
+  const std::string graph_file = getenv_s("CK_ENV_TENSORFLOW_MODEL_TFLITE_FILEPATH");
+  const std::string data_layout = getenv_s("ML_MODEL_DATA_LAYOUT");
+
 
   BenchmarkSettings() {
     // Print settings

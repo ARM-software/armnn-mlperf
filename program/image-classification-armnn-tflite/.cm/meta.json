@@ -78,11 +78,14 @@
           "script_name": "postprocess"
         },
         "pre_process_via_ck": {
-          "data_uoa": "b98ee24399ef4c3a",
-          "module_uoa": "script",
-          "script_name": "preprocess"
+          "data_uoa":       "b98ee24399ef4c3a",
+          "module_uoa":     "script",
+          "script_name":    "schindler"
         },
         "run_cmd_main": "$#BIN_FILE#$",
+        "run_input_files": [
+          "$<<CK_ENV_TENSORFLOW_MODEL_TFLITE_FILEPATH>>$"
+        ],
         "run_output_files": [
           "tmp-ck-timer.json"
         ]
@@ -97,12 +100,12 @@
       "sort": 10,
       "tags": "dataset,imagenet,aux"
     },
-    "imagenet-val": {
+    "images": {
       "force_target_as_host": "yes",
       "local": "yes",
-      "name": "ImageNet dataset (val)",
+      "name": "ImageNet dataset (preprocessed subset)",
       "sort": 20,
-      "tags": "dataset,imagenet,raw,val"
+      "tags": "dataset,imagenet,preprocessed"
     },
     "lib-python-numpy": {
       "local": "yes",
@@ -145,9 +148,11 @@
     "CK_RECREATE_CACHE": "NO",
     "CK_SKIP_IMAGES": 0,
     "CK_SUBTRACT_MEAN": "YES",
+    "CK_RESULTS_DIR": "predictions",
     "CK_TMP_IMAGE_SIZE": 0,
     "USE_NEON": "NO",
-    "USE_OPENCL": "NO"
+    "USE_OPENCL": "NO",
+    "CK_SILENT_MODE": 0
   },
   "skip_bin_ext": "yes",
   "source_files": [
