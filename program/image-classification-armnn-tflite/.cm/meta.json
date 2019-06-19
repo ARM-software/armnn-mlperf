@@ -55,7 +55,7 @@
   "compiler_env": "CK_CXX",
   "compiler_flags_as_env": "$<<CK_COMPILER_FLAG_CPP14>>$ -Wall -Wno-sign-compare",
   "data_name": "image-classification-armnn-tflite",
-  "extra_ld_vars": "$<<CK_ENV_LIB_TF_LIBS_DIRS>>$ $<<CK_ENV_LIB_TF_LIBS>>$ -L$<<CK_ENV_LIB_BOOST_LIB>>$ -lboost_log -lboost_filesystem -lboost_atomic -lboost_date_time -lboost_regex -lboost_thread -lboost_chrono -lboost_system -L$<<CK_ENV_LIB_ARMNN_LIB>>$ -larmnn -pthread -larmnnTfLiteParser",
+  "extra_ld_vars": "$<<CK_ENV_LIB_TF_LIBS_DIRS>>$ $<<CK_ENV_LIB_TF_LIBS>>$ -L$<<CK_ENV_LIB_BOOST_LIB>>$ -lboost_log -lboost_filesystem -lboost_atomic -lboost_date_time -lboost_regex -lboost_thread -lboost_chrono -lboost_system -Wl,--rpath-link=$<<CK_ENV_LIB_ARMCL_SRC>>$/build/opencl-1.2-stubs -L$<<CK_ENV_LIB_ARMNN_LIB>>$ -larmnn -pthread -larmnnTfLiteParser",
   "linker_add_lib_as_env": [
     "CK_CXX_EXTRA",
     "CK_ENV_LIB_STDCPP_DYNAMIC"
