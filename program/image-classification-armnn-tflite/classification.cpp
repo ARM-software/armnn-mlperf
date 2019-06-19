@@ -45,12 +45,13 @@ armnn::OutputTensors MakeOutputTensors(const std::pair<armnn::LayerBindingId,
 
 
 int main(int argc, char* argv[]) {
-    bool use_neon                   = getenv_b("USE_NEON");
-    bool use_opencl                 = getenv_b("USE_OPENCL");
-    string input_layer_name         = getenv_s("CK_ENV_TENSORFLOW_MODEL_INPUT_LAYER_NAME");
-    string output_layer_name        = getenv_s("CK_ENV_TENSORFLOW_MODEL_OUTPUT_LAYER_NAME");
 
     try {
+        bool use_neon                   = getenv_b("USE_NEON");
+        bool use_opencl                 = getenv_b("USE_OPENCL");
+        string input_layer_name         = getenv_s("CK_ENV_TENSORFLOW_MODEL_INPUT_LAYER_NAME");
+        string output_layer_name        = getenv_s("CK_ENV_TENSORFLOW_MODEL_OUTPUT_LAYER_NAME");
+
         init_benchmark();
 
         BenchmarkSettings settings;
