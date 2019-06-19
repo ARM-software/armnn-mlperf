@@ -107,30 +107,6 @@
       "sort": 20,
       "tags": "dataset,imagenet,preprocessed"
     },
-    "lib-python-numpy": {
-      "local": "yes",
-      "name": "NumPy python library",
-      "sort": 110,
-      "tags": "lib,python-package,numpy"
-    },
-    "lib-python-pillow": {
-      "local": "yes",
-      "name": "Pillow python library",
-      "sort": 130,
-      "tags": "lib,python-package,pillow"
-    },
-    "lib-python-scipy": {
-      "local": "yes",
-      "name": "SciPy python library",
-      "sort": 120,
-      "tags": "lib,python-package,scipy"
-    },
-    "python": {
-      "local": "yes",
-      "name": "Python interpreter",
-      "sort": 100,
-      "tags": "compiler,python"
-    },
     "weights": {
       "force_target_as_host": "yes",
       "local": "yes",
