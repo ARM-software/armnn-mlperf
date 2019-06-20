@@ -94,6 +94,7 @@
       "ignore_return_code": "no", 
       "run_time": {
         "copy_env_to_remote": [
+          "CK_ENV_TENSORFLOW_MODEL_ANCHORS",
           "CK_ENV_TENSORFLOW_MODEL_CLASSES", 
           "CK_ENV_TENSORFLOW_MODEL_DATASET_TYPE", 
           "CK_ENV_TENSORFLOW_MODEL_IMAGE_HEIGHT", 
@@ -128,14 +129,27 @@
         }, 
         "run_cmd_main": "$#BIN_FILE#$", 
         "run_input_files": [
-          "$<<>>$tmp-ck-timer.json", 
-          "$<<>>$preprocessed", 
-          "$<<>>$preprocessed_images_list.txt", 
-          "$<<CK_ENV_TENSORFLOW_MODEL_ROOT>>$/detect_fast_nms.tflite", 
-          "$<<CK_ENV_TENSORFLOW_MODEL_ROOT>>$/detect_no_nms.tflite", 
-          "$<<CK_ENV_TENSORFLOW_MODEL_ROOT>>$/detect_regular_nms.tflite", 
-          "$<<CK_ENV_TENSORFLOW_MODEL_ROOT>>$/flatlabels.txt", 
-          "$<<CK_ENV_TENSORFLOW_MODEL_ROOT>>$/flatanchors.txt"
+            "$<<CK_ENV_LIB_STDCPP_DYNAMIC>>$",
+            "$<<CK_ENV_LIB_BOOST>>$/lib/libboost_log.so.1.64.0",
+            "$<<CK_ENV_LIB_BOOST>>$/lib/libboost_atomic.so.1.64.0",
+            "$<<CK_ENV_LIB_BOOST>>$/lib/libboost_chrono.so.1.64.0",
+            "$<<CK_ENV_LIB_BOOST>>$/lib/libboost_date_time.so.1.64.0",
+            "$<<CK_ENV_LIB_BOOST>>$/lib/libboost_filesystem.so.1.64.0",
+            "$<<CK_ENV_LIB_BOOST>>$/lib/libboost_log.so.1.64.0",
+            "$<<CK_ENV_LIB_BOOST>>$/lib/libboost_log_setup.so.1.64.0",
+            "$<<CK_ENV_LIB_BOOST>>$/lib/libboost_prg_exec_monitor.so.1.64.0",
+            "$<<CK_ENV_LIB_BOOST>>$/lib/libboost_program_options.so.1.64.0",
+            "$<<CK_ENV_LIB_BOOST>>$/lib/libboost_regex.so.1.64.0",
+            "$<<CK_ENV_LIB_BOOST>>$/lib/libboost_system.so.1.64.0",
+            "$<<CK_ENV_LIB_BOOST>>$/lib/libboost_thread.so.1.64.0",
+            "$<<CK_ENV_LIB_BOOST>>$/lib/libboost_timer.so.1.64.0",
+            "$<<CK_ENV_LIB_BOOST>>$/lib/libboost_unit_test_framework.so.1.64.0",
+            "$<<CK_ENV_LIB_ARMNN>>$/lib/libarmnnTfLiteParser.so",
+            "$<<CK_ENV_TENSORFLOW_MODEL_ROOT>>$/detect_fast_nms.tflite",
+            "$<<CK_ENV_TENSORFLOW_MODEL_ROOT>>$/detect_no_nms.tflite",
+            "$<<CK_ENV_TENSORFLOW_MODEL_ROOT>>$/detect_regular_nms.tflite",
+            "$<<CK_ENV_TENSORFLOW_MODEL_ROOT>>$/flatlabels.txt",
+            "$<<CK_ENV_TENSORFLOW_MODEL_ROOT>>$/flatanchors.txt"
         ], 
         "run_make_directories": [
           "detections", 
@@ -149,6 +163,28 @@
     }
   }, 
   "run_deps": {
+    "lib-boost": {
+      "comment": "Although transitive dependency of ArmNN, still have to add it manually in order to push its dynamic libraries to Android",
+      "local": "yes",
+      "name": "Boost library",
+      "skip_default": "yes",
+      "add_dict": "yes",
+      "sort": 5,
+      "tags": "lib,boost,for-armnn",
+      "version_from": [
+        1,
+        64,
+        0
+      ],
+      "version_to": [
+        1,
+        64,
+        0
+      ],
+      "only_for_target_os_tags": [
+        "android"
+      ]
+    },
     "dataset": {
       "force_target_as_host": "yes", 
       "local": "yes", 
