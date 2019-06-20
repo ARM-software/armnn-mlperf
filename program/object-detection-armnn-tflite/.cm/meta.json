@@ -75,10 +75,10 @@
   "compiler_env": "CK_CXX", 
   "compiler_flags_as_env": "$<<CK_COMPILER_FLAG_CPP14>>$ $<<CK_ENV_LIB_TF_DEF>>$ -Wall -Wno-sign-compare", 
   "data_name": "object-detection-armnn-tflite", 
-  "extra_ld_vars": "$<<CK_ENV_LIB_TF_LINK_OPTIONS>>$ $<<CK_ENV_LIB_TF_LIBS_DIRS>>$ $<<CK_ENV_LIB_TF_LIBS>>$ -L$<<CK_ENV_LIB_ARMNN_LIB>>$ -larmnn -lpthread -larmnnTfLiteParser", 
+  "extra_ld_vars": "$<<CK_ENV_LIB_TF_LINK_OPTIONS>>$ $<<CK_ENV_LIB_TF_LIBS_DIRS>>$ $<<CK_ENV_LIB_TF_LIBS>>$ -L$<<CK_ENV_LIB_BOOST_LIB>>$ -lboost_log -lboost_filesystem -lboost_atomic -lboost_date_time -lboost_regex -lboost_thread -lboost_chrono -lboost_system $<<CK_ENV_LIB_ARMCL_CL_STUB_RPATH_LINK>>$ -L$<<CK_ENV_LIB_ARMNN_LIB>>$ -larmnn -larmnnTfLiteParser -pthread", 
   "linker_add_lib_as_env": [
     "CK_CXX_EXTRA", 
-    "CK_ENV_LIB_STDCPP_STATIC"
+    "CK_ENV_LIB_STDCPP_DYNAMIC"
   ], 
   "main_language": "cpp", 
   "need_cpu_info": "yes", 
