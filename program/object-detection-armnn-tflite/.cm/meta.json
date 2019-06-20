@@ -47,17 +47,6 @@
       "sort": 90, 
       "tags": "lib,flatbuffers"
     }, 
-    "lib-tflite": {
-      "local": "yes", 
-      "name": "TensorFlow Lite C++ API", 
-      "sort": 20, 
-      "tags": "lib,tensorflow-lite,tflite,vstatic", 
-      "version_from": [
-        1, 
-        13, 
-        1
-      ]
-    }, 
     "lib-xopenme": {
       "local": "yes", 
       "name": "xOpenME library", 
