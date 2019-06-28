@@ -107,7 +107,9 @@ $ ck install package --tags=lib,armnn,tflite,rel.19.02
 <a name="image_classification"></a>
 # Image classification
 
-Please follow the MLPerf image classification instructions to install dependencies such as Python packages: first, the [common instructions](https://github.com/mlperf/inference/blob/master/edge/object_classification/mobilenets/README.md); then, the [TFLite instructions](https://github.com/mlperf/inference/blob/master/edge/object_classification/mobilenets/tflite/README.md).
+Please follow the MLPerf image classification instructions to install dependencies such as Python packages:
+- first, the [common instructions](https://github.com/mlperf/inference/tree/master/v0.5/classification_and_detection/optional_harness_ck/classification/README.md);
+- then,  the [TFLite instructions](https://github.com/mlperf/inference/tree/master/v0.5/classification_and_detection/optional_harness_ck/classification/tflite/README.md).
 
 <a name="imagenet"></a>
 ## Download and preprocess the ImageNet 2012 validation dataset
@@ -669,7 +671,9 @@ mlperf-resnet-accuracy-500-velociti:experiment:mlperf-resnet-tflite-accuracy-500
 <a name="object_detection"></a>
 # Object detection
 
-Please follow the MLPerf object detection instructions to install dependencies such as Python packages: first, the [common instructions](https://github.com/mlperf/inference/blob/master/edge/object_detection/ssd_mobilenet/README.md); then, the [TFLite instructions](https://github.com/mlperf/inference/blob/master/edge/object_detection/ssd_mobilenet/tflite/README.md).
+Please follow the MLPerf object detection instructions to install dependencies such as Python packages:
+- first, the [common instructions](https://github.com/mlperf/inference/tree/master/v0.5/classification_and_detection/optional_harness_ck/detection/README.md);
+- then,  the [TFLite instructions](https://github.com/mlperf/inference/tree/master/v0.5/classification_and_detection/optional_harness_ck/detection/tflite/README.md).
 
 <a name="object_detection_caveats"></a>
 ## Caveats
@@ -679,7 +683,9 @@ The SSD models require TFLite 1.13.1.
 
 ### Python 3
 
-The [COCO API](https://github.com/cocodataset/cocoapi) (used to evaluate object detection accuracy on the [COCO dataset](http://cocodataset.org/)) requires Python 3. Since many embedded platforms use Python 2 by default (including HiKey960), [care must be taken](https://github.com/dividiti/inference/blob/ssd_mobilenet/edge/object_detection/ssd_mobilenet/README.md#install-python-3-and-the-latest-pip) not to mix Python 3 and Python 2 packages. Therefore, all benchmarking commands below use the `CK_PYTHON=python3` prefix to ensure CK runs under Python 3.
+The [COCO API](https://github.com/cocodataset/cocoapi) (used to evaluate object detection accuracy on the [COCO dataset](http://cocodataset.org/)) requires Python 3.
+Since many embedded platforms use Python 2 by default (including HiKey960), [care must be taken](https://github.com/mlperf/inference/tree/master/v0.5/classification_and_detection/optional_harness_ck/detection#install-python-3-and-the-latest-pip) not to mix Python 3 and Python 2 packages.
+Therefore, all benchmarking commands below use the `CK_PYTHON=python3` prefix to ensure CK runs under Python 3.
 
 <a name="coco"></a>
 ## Download and preprocess the COCO 2017 validation dataset
