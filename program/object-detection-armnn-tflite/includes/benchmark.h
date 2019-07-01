@@ -162,7 +162,6 @@ namespace CK {
         /// Finish measuring of non_max_suppression stage
         float measure_end_non_max_suppression(std::chrono::time_point<std::chrono::high_resolution_clock> *start_time=NULL) {
             float duration = measure_end(start_time);
-            _total_prediction_time += duration;
             if (_settings->verbose())
                 std::cout << "non_max_suppression completed in " << duration << " s" << std::endl;
             _non_max_suppression_time.add(duration);
