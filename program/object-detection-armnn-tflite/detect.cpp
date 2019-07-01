@@ -131,7 +131,7 @@ int main(int argc, char *argv[]) {
         });
 
         cout << "\nProcessing batches..." << endl;
-       measure_prediction([&] {
+        measure_prediction([&] {
            std::chrono::time_point<std::chrono::high_resolution_clock> nms_time;
 
            while (session.get_next_batch()) {
