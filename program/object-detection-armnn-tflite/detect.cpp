@@ -141,14 +141,14 @@ int main(int argc, char *argv[]) {
 
                session.measure_begin();
                if (runtime->EnqueueWorkload(networkIdentifier, inTensors, outTensors) != armnn::Status::Success)
-                   throw "Failed to invoke the classifier";
+                   throw "Failed to invoke the detector";
 
                session.measure_begin(&nms_time);
                benchmark->non_max_suppression(session.batch_files());
                session.measure_end_non_max_suppression(&nms_time);
 
                session.measure_end_prediction();
-               
+
                benchmark->save_results(session.batch_files());
            }
         });
