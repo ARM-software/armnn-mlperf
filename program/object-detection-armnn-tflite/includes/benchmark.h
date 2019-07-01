@@ -153,9 +153,7 @@ namespace CK {
             _total_prediction_time += duration;
             if (_settings->full_report() || _settings->verbose())
                 std::cout << "Batch processed in " << duration << " s" << std::endl;
-            // Skip first batch in order to account for warming-up of the system
-            if (_batch_index > 0 || _settings->batch_count() == 1)
-                _prediction_time.add(duration);
+            _prediction_time.add(duration);
             return duration;
         }
 
