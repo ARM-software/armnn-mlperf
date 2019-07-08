@@ -187,25 +187,12 @@
       "tags": "lib,flatbuffers"
     }, 
     "lib-python-matplotlib": {
+      "comment": "make sure you run the program with the same CK_PYTHON that was used to install matplotlib",
       "force_target_as_host": "yes", 
       "local": "yes", 
       "name": "MatPlotLib python library", 
-      "sort": 45, 
-      "tags": "lib,python-package,matplotlib"
-    }, 
-    "lib-python-numpy": {
-      "force_target_as_host": "yes", 
-      "local": "yes", 
-      "name": "NumPy python library", 
-      "sort": 30, 
-      "tags": "lib,python-package,numpy"
-    }, 
-    "lib-python-pillow": {
-      "force_target_as_host": "yes", 
-      "local": "yes", 
-      "name": "Pillow python library", 
       "sort": 40, 
-      "tags": "lib,python-package,pillow"
+      "tags": "lib,python-package,matplotlib"
     }, 
     "lib-xopenme": {
       "local": "yes", 
