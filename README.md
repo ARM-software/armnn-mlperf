@@ -718,7 +718,7 @@ $ CK_PYTHON=python3 ck benchmark program:object-detection-tflite \
 ### ArmNN Neon data
 ```bash
 $ CK_PYTHON=python3 ck benchmark program:object-detection-armnn-tflite --env.USE_NMS=regular --env.USE_NEON \
---repetitions=1 --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=5000 --env.CK_METRIC_TYPE=COCO \
+--speed --repetitions=1 --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=5000 --env.CK_METRIC_TYPE=COCO \
 --record --record_repo=local --record_uoa=mlperf-object-detection-ssd-mobilenet-armnn-tflite-accuracy-neon \
 --tags=mlperf,object-detection,ssd-mobilenet,armnn-tflite,accuracy,neon \
 --skip_print_timers --skip_stat_analysis --process_multi_keys
@@ -728,7 +728,7 @@ $ CK_PYTHON=python3 ck benchmark program:object-detection-armnn-tflite --env.USE
 ### ArmNN OpenCL data
 ```bash
 $ CK_PYTHON=python3 ck benchmark program:object-detection-armnn-tflite --env.USE_NMS=regular --env.USE_OPENCL \
---repetitions=1 --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=5000 --env.CK_METRIC_TYPE=COCO \
+--speed --repetitions=1 --env.CK_BATCH_SIZE=1 --env.CK_BATCH_COUNT=5000 --env.CK_METRIC_TYPE=COCO \
 --record --record_repo=local --record_uoa=mlperf-object-detection-ssd-mobilenet-armnn-tflite-accuracy-opencl \
 --tags=mlperf,object-detection,ssd-mobilenet,armnn-tflite,accuracy,opencl \
 --skip_print_timers --skip_stat_analysis --process_multi_keys
