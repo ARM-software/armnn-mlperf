@@ -147,13 +147,13 @@ public:
     switch (mode)
     {
     case MODEL_TYPE::LITE:
-      _graph_file = getenv_s("CK_ENV_TENSORFLOW_MODEL_TFLITE_FILEPATH");
+      graph_file = getenv_s("CK_ENV_TENSORFLOW_MODEL_TFLITE_FILEPATH");
       break;
-    
+
     case MODEL_TYPE::TF_FROZEN:
-      _graph_file = getenv_s("CK_ENV_TENSORFLOW_MODEL_TF_FROZEN_FILEPATH");
+      graph_file = getenv_s("CK_ENV_TENSORFLOW_MODEL_TF_FROZEN_FILEPATH");
       break;
-    
+
     default:
       std::cout << "Unsupported MODEL_TYPE" << std::endl;
       exit(-1);
@@ -198,12 +198,10 @@ public:
 
   std::vector<std::string> _image_list;
 
-  std::string graph_file() { return _graph_file; }
-
   float given_channel_means[3];
+  std::string graph_file;
 private:
   int _number_of_threads;
-  std::string _graph_file;
 };
 
 //----------------------------------------------------------------------
