@@ -152,7 +152,7 @@
   }, 
   "run_deps": {
     "lib-boost": {
-      "comment": "Although transitive dependency of ArmNN, still have to add it manually in order to push its dynamic libraries to Android",
+      "comment": "Although a transitive dependency of ArmNN, still have to add it manually in order to push its dynamic libraries to Android",
       "local": "yes",
       "name": "Boost library",
       "skip_default": "yes",
@@ -172,6 +172,19 @@
       "only_for_target_os_tags": [
         "android"
       ]
+    },
+    "lib-opencl": {
+       "comment": "Although a transitive dependency of ArmNN, still have to add it manually if not in standard system paths",
+       "local": "yes",
+       "name": "OpenCL library",
+       "skip_default": "yes",
+       "add_dict": "yes",
+       "sort": 1,
+       "tags": "lib,opencl",
+       "no_tags": "armnn,armcl",
+       "only_for_target_os_tags": [
+         "linux"
+       ]
     },
     "dataset": {
       "force_target_as_host": "yes", 
