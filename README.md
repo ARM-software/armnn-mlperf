@@ -126,6 +126,37 @@ $ ck install package --tags=dataset,imagenet,val,original,min --no_tags=resized
 $ ck install package --tags=dataset,imagenet,val,preprocessed
 ```
 
+### Preprocess on an x86 machine and detect on an arm dev board
+
+The only preprocessing method that works on arm dev boards uses Pillow, which
+results in significant accuracy degradation compared to the official
+preprocessing method that uses OpenCV.  However, you can preprocess on an x86
+machine either using OpenCV or TensorFlow, copy the resulting inputs to an arm
+dev board and detect them there.
+
+Suppose you have preprocessed the ImageNet dataset on an x86 machine in two different ways:
+```
+$ ck install package --tags=dataset,imagenet,val,preprocessed,using-opencv
+$ ck install package --tags=dataset,imagenet,val,preprocessed,using-tensorflow
+```
+
+The preprocessed datasets can be archived into several volumes to facilitate transfer to an arm development board e.g.:
+```
+$ for i in {0..5}; do tar cvf dataset-imagenet-preprocessed-using-opencv.${i}.tar <dataset-imagenet-preprocessed-using-opencv-dir>/ILSVRC2012_val_000${i}*; done
+$ md5sum dataset-imagenet-preprocessed-using-opencv.?.tar
+```
+copied over, unarchived and detected as follows:
+```
+$ for i in {0..5}; do tar xvf dataset-imagenet-preprocessed-using-opencv.${i}.tar; done
+$ ck detect soft --tags=dataset,imagenet,preprocessed,rgb8 --extra_tags=using-opencv \
+--full_path=<dataset-imagenet-preprocessed-using-opencv-dir>/ILSVRC2012_val_00000001.rgb8
+
+$ for i in {0..5}; do tar xvf dataset-imagenet-preprocessed-using-tensorflow.${i}.tar; done
+$ ck detect soft --tags=dataset,imagenet,preprocessed,rgbf32 --extra_tags=using-tensorflow \
+--full_path=<dataset-imagenet-preprocessed-using-tensorflow-dir>/ILSVRC2012_val_00000001.rgbf32
+```
+
+
 <a name="mobilenet"></a>
 ## MobileNet
 
