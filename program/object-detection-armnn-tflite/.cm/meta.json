@@ -7,7 +7,7 @@
       "sort": 0, 
       "tags": "compiler,lang-cpp"
     }, 
-    "lib-armnn": {
+    "library": {
       "local": "yes", 
       "name": "ArmNN library (with TFLite support)", 
       "sort": 40, 
