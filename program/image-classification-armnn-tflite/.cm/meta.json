@@ -14,28 +14,8 @@
       "sort": 40,
       "tags": "lib,armnn,tflite",
       "update_tags_if_env": {
-        "neon": [
-          {
-            "USE_NEON": [
-              "on",
-              "ON",
-              "yes",
-              "YES",
-              "1"
-            ]
-          }
-        ],
-        "opencl": [
-          {
-            "USE_OPENCL": [
-              "on",
-              "ON",
-              "yes",
-              "YES",
-              "1"
-            ]
-          }
-        ]
+        "neon": [ { "USE_NEON": [ "on", "ON", "yes", "YES", "1" ] } ],
+        "opencl": [ { "USE_OPENCL": [ "on", "ON", "yes", "YES", "1" ] } ]
       }
     },
     "lib-xopenme": {
@@ -79,6 +59,7 @@
           "CK_ENV_TENSORFLOW_MODEL_OUTPUT_LAYER_NAME",
           "CK_ENV_TENSORFLOW_MODEL_NORMALIZE_DATA",
           "CK_ENV_TENSORFLOW_MODEL_SUBTRACT_MEAN",
+          "ML_MODEL_GIVEN_CHANNEL_MEANS",
           "ML_MODEL_DATA_LAYOUT"
         ],
         "fine_grain_timer_file": "tmp-ck-timer.json",
