@@ -71,12 +71,12 @@ $ ck install package --tags=lib,tflite,v1.13
 ## Install ArmNN
 To install ArmNN with full support (frontends: TF, TFLite, ONNX; backends: Reference, OpenCL, Neon):
 ```
-$ ck install package --tags=lib,armnn,tf,tflite,onnx,neon,opencl,rel.19.02
+$ ck install package --tags=lib,armnn,tf,tflite,onnx,neon,opencl,rel.20.08
 ```
 **NB:** On a platform with only a couple of GB of RAM, you way wish to restrict
 the number of CPU build threads e.g. as follows:
 ```
-$ ck install package --tags=lib,armnn,tflite,neon,opencl,rel.19.02 \
+$ ck install package --tags=lib,armnn,tflite,neon,opencl,rel.20.08 \
 --env.CK_HOST_CPU_NUMBER_OF_PROCESSORS=4
 ```
 
@@ -86,22 +86,22 @@ For more details, please refer to the [CK-ArmNN](http://github.com/ctuning/ck-ar
 <a name="gs_armnn_tflite_neon_opencl"></a>
 ### Option 1: Install ArmNN with TFLite, Neon and OpenCL support (**recommended**)
 ```
-$ ck install package --tags=lib,armnn,tflite,neon,opencl,rel.19.02
+$ ck install package --tags=lib,armnn,tflite,neon,opencl,rel.20.08
 ```
 <a name="gs_armnn_tflite_neon"></a>
 ### Option 2: Install ArmNN with TFLite and Neon support
 ```
-$ ck install package --tags=lib,armnn,tflite,neon,rel.19.02
+$ ck install package --tags=lib,armnn,tflite,neon,rel.20.08
 ```
 <a name="gs_armnn_tflite_opencl"></a>
 ### Option 3: Install ArmNN with TFLite and OpenCL support
 ```
-$ ck install package --tags=lib,armnn,tflite,opencl,rel.19.02
+$ ck install package --tags=lib,armnn,tflite,opencl,rel.20.08
 ```
 <a name="gs_armnn_tflite_reference"></a>
 ### Option 4: ArmNN with TFLite and Reference support
 ```
-$ ck install package --tags=lib,armnn,tflite,rel.19.02
+$ ck install package --tags=lib,armnn,tflite,rel.20.08
 ```
 
 <a name="image_classification"></a>
