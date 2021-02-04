@@ -6,9 +6,11 @@
   "dict": {
     "repo_deps": [
       {
+        "repo_url": "http://github.com/krai/ck-armnn",
         "repo_uoa": "ck-armnn"
       },
       {
+        "repo_url": "http://github.com/krai/ck-mlperf",
         "repo_uoa": "ck-mlperf"
       }
     ],
