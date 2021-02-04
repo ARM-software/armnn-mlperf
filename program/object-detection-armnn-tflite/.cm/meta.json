@@ -194,7 +194,7 @@
       "local": "yes", 
       "name": "Preprocessed images", 
       "sort": 20, 
-      "tags": "dataset,object-detection,preprocessed"
+      "tags": "dataset,object-detection,preprocessed,side.300"
     }, 
     "lib-flatbuffers": {
       "local": "yes", 
