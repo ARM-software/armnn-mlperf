@@ -175,6 +175,9 @@
     },
     "lib-opencl": {
        "comment": "Although a transitive dependency of ArmNN, still have to add it manually if not in standard system paths",
+       "enable_if_env": [
+         { "USE_OPENCL": [ "on", "ON", "yes", "YES", "1", "true", "TRUE" ] }
+       ],
        "local": "yes",
        "name": "OpenCL library",
        "skip_default": "yes",
