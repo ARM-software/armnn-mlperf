@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2022 Krai Ltd.
  * Copyright (c) 2019 dividiti Ltd.
  * Copyright (c) 2019 Arm Ltd.
  *
@@ -119,14 +120,14 @@ int main(int argc, char* argv[]) {
                         benchmark.reset(new ArmNNBenchmark<float, InNormalize, OutCopy>(&settings, (float*)input, (float*)output, 0));
                     break;
 
-                case armnn::DataType::QuantisedAsymm8:
+                case armnn::DataType::QAsymmU8:
                     benchmark.reset(new ArmNNBenchmark<uint8_t, InCopy, OutDequantize>(&settings, (uint8_t*)input, (uint8_t*)output, 0));
                     break;
 
                 default:
                     throw format("Unsupported type of graph's input: %d. "
                                  "Supported types are: Float32 (%d), UInt8 (%d)",
-                                 int(input_type), int(armnn::DataType::Float32), int(armnn::DataType::QuantisedAsymm8));
+                                 int(input_type), int(armnn::DataType::Float32), int(armnn::DataType::QAsymmU8));
             }
 
             int out_num = outShape[0];
